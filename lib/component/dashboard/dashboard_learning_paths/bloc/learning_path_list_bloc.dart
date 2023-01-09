@@ -24,7 +24,7 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
 
   _load(Emitter<LearningPathListState> emit) async {
     emit(LearningPathListState.loading());
-    await Future.delayed(const Duration(milliseconds: 2000));
+    await Future.delayed(const Duration(milliseconds: 200));
     emit(LearningPathListState.load([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));
   }
 }

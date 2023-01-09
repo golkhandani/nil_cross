@@ -16,7 +16,8 @@ class AuthenticationGuard extends AutoRouteGuard {
   AppSharedStore get _appSharedStore => locator.get();
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
-    final isAuthenticated = await _appSharedStore.get<bool?>(AuthenticationBloc.isAuthenticatedKey) ?? false;
+    final isAuthenticated =
+        await _appSharedStore.get<bool?>(AuthenticationBloc.isAuthenticatedKey) ?? false;
     print('isAuthenticated $isAuthenticated ${resolver.route.queryParams}');
     // the navigation is paused until resolver.next() is called with either
     // true to resume/continue navigation or false to abort navigation
@@ -27,6 +28,27 @@ class AuthenticationGuard extends AutoRouteGuard {
     } else {
       // we redirect the user to our login page
       router.push(LoginRouter());
+    }
+  }
+}
+
+// to pervent user from accessing the login or signup page while they are already logged in.
+class AuthenticatedGuard extends AutoRouteGuard {
+  AppSharedStore get _appSharedStore => locator.get();
+  @override
+  void onNavigation(NavigationResolver resolver, StackRouter router) async {
+    final isAuthenticated =
+        await _appSharedStore.get<bool?>(AuthenticationBloc.isAuthenticatedKey) ?? false;
+    print('isAuthenticated $isAuthenticated ${resolver.route.queryParams}');
+    // the navigation is paused until resolver.next() is called with either
+    // true to resume/continue navigation or false to abort navigation
+
+    if (!isAuthenticated) {
+      // if user is not authenticated we continue
+      resolver.next(true);
+    } else {
+      // we redirect the user to our dashboard page
+      router.push(const DashboardRouter());
     }
   }
 }

@@ -1,10 +1,12 @@
 import 'package:auto_route/empty_router_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:test_routing_flow/component/dashboard/dashboard_forks/dashboard_forks_screen.dart';
+import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/dashboard_learning_path_list/dashboard_learning_path_list_screen.dart';
+import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/dashboard_learning_path_single/dashboard_learning_path_single_screen.dart';
 import 'package:test_routing_flow/component/dashboard/dashboard_screen.dart';
-import 'package:test_routing_flow/component/dashboard_learning_path_list/dashboard_learning_path_list_screen.dart';
-import 'package:test_routing_flow/component/dashboard_learning_path_single/dashboard_learning_path_single_screen.dart';
-import 'package:test_routing_flow/component/dashboard_profile/dashboard_profile.dart';
+import 'package:test_routing_flow/component/dashboard/dashboard_profile/dashboard_profile_screen.dart';
+import 'package:test_routing_flow/component/dashboard/dashboard_settings/dashboard_settings_screen.dart';
 import 'package:test_routing_flow/component/home/home_screen.dart';
 import 'package:test_routing_flow/component/login/login_screen.dart';
 import 'package:test_routing_flow/router/authentication_gaurd.dart';
@@ -24,12 +26,13 @@ part 'app_router.gr.dart';
       name: LoginScreen.routerName,
       path: LoginScreen.routerPath,
       page: LoginScreen,
+      guards: [AuthenticatedGuard],
     ),
     AutoRoute(
       path: DashboardScreen.routerPath,
       name: DashboardScreen.routerName,
       page: DashboardScreen,
-      // guards: [AuthenticationGuard],
+      guards: [AuthenticationGuard],
       children: [
         RedirectRoute(path: '', redirectTo: DashboardLearningPathListScreen.routerPath),
         AutoRoute(
@@ -52,9 +55,21 @@ part 'app_router.gr.dart';
           ],
         ),
         AutoRoute(
-          name: DashboarProfileScreen.routerName,
-          path: DashboarProfileScreen.routerPath,
-          page: DashboarProfileScreen,
+          name: DashboardProfileScreen.routerName,
+          path: DashboardProfileScreen.routerPath,
+          page: DashboardProfileScreen,
+          guards: [AuthenticationGuard],
+        ),
+        AutoRoute(
+          name: DashboardForksScreen.routerName,
+          path: DashboardForksScreen.routerPath,
+          page: DashboardForksScreen,
+          guards: [AuthenticationGuard],
+        ),
+        AutoRoute(
+          name: DashboardSettingsScreen.routerName,
+          path: DashboardSettingsScreen.routerPath,
+          page: DashboardSettingsScreen,
           guards: [AuthenticationGuard],
         ),
       ],
@@ -69,5 +84,5 @@ part 'app_router.gr.dart';
 )
 // extend the generated private router
 class AppRouter extends _$AppRouter {
-  AppRouter({required super.authenticationGuard});
+  AppRouter({required super.authenticationGuard, required super.authenticatedGuard});
 }

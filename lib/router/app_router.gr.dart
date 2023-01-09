@@ -15,8 +15,11 @@ part of 'app_router.dart';
 class _$AppRouter extends RootStackRouter {
   _$AppRouter({
     GlobalKey<NavigatorState>? navigatorKey,
+    required this.authenticatedGuard,
     required this.authenticationGuard,
   }) : super(navigatorKey);
+
+  final AuthenticatedGuard authenticatedGuard;
 
   final AuthenticationGuard authenticationGuard;
 
@@ -60,7 +63,19 @@ class _$AppRouter extends RootStackRouter {
     DashboardProfileRouter.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const DashboarProfileScreen(),
+        child: const DashboardProfileScreen(),
+      );
+    },
+    DashboardForksRouter.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const DashboardForksScreen(),
+      );
+    },
+    DashboardSettingsRouter.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const DashboardSettingsScreen(),
       );
     },
     DashboardLearningPathListScreenRoute.name: (routeData) {
@@ -99,10 +114,12 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(
           LoginRouter.name,
           path: '/login',
+          guards: [authenticatedGuard],
         ),
         RouteConfig(
           DashboardRouter.name,
           path: '/dashboard',
+          guards: [authenticationGuard],
           children: [
             RouteConfig(
               '#redirect',
@@ -132,6 +149,18 @@ class _$AppRouter extends RootStackRouter {
             RouteConfig(
               DashboardProfileRouter.name,
               path: 'profile',
+              parent: DashboardRouter.name,
+              guards: [authenticationGuard],
+            ),
+            RouteConfig(
+              DashboardForksRouter.name,
+              path: 'forks',
+              parent: DashboardRouter.name,
+              guards: [authenticationGuard],
+            ),
+            RouteConfig(
+              DashboardSettingsRouter.name,
+              path: 'settings',
               parent: DashboardRouter.name,
               guards: [authenticationGuard],
             ),
@@ -230,7 +259,7 @@ class DashboardLearningPathListRouter extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [DashboarProfileScreen]
+/// [DashboardProfileScreen]
 class DashboardProfileRouter extends PageRouteInfo<void> {
   const DashboardProfileRouter()
       : super(
@@ -239,6 +268,30 @@ class DashboardProfileRouter extends PageRouteInfo<void> {
         );
 
   static const String name = 'DashboardProfileRouter';
+}
+
+/// generated route for
+/// [DashboardForksScreen]
+class DashboardForksRouter extends PageRouteInfo<void> {
+  const DashboardForksRouter()
+      : super(
+          DashboardForksRouter.name,
+          path: 'forks',
+        );
+
+  static const String name = 'DashboardForksRouter';
+}
+
+/// generated route for
+/// [DashboardSettingsScreen]
+class DashboardSettingsRouter extends PageRouteInfo<void> {
+  const DashboardSettingsRouter()
+      : super(
+          DashboardSettingsRouter.name,
+          path: 'settings',
+        );
+
+  static const String name = 'DashboardSettingsRouter';
 }
 
 /// generated route for

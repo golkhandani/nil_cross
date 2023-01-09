@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class DashboarProfileScreen extends StatefulWidget {
+class DashboardProfileScreen extends StatefulWidget {
   static const routerName = 'DashboardProfileRouter';
   static const routerPath = 'profile';
-  const DashboarProfileScreen({super.key});
+  const DashboardProfileScreen({super.key});
 
   @override
-  State<DashboarProfileScreen> createState() => _DashboarProfileScreenState();
+  State<DashboardProfileScreen> createState() => _DashboardProfileScreenState();
 }
 
-class _DashboarProfileScreenState extends State<DashboarProfileScreen> {
+class _DashboardProfileScreenState extends State<DashboardProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(

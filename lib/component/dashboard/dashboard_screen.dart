@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:auto_route/auto_route.dart';
@@ -5,6 +6,7 @@ import 'package:floating_navigation_bar/floating_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
+import 'package:test_routing_flow/common/breakpoint_extension.dart';
 import 'package:test_routing_flow/component/authentication/bloc/authentication_bloc.dart';
 import 'package:test_routing_flow/router/app_locator.dart';
 import 'package:test_routing_flow/router/app_router.dart';
@@ -17,6 +19,7 @@ class ApplicationPage {
     required this.name,
     required this.path,
     required this.iconData,
+    required this.pageRouteInfo,
     this.color,
   });
 
@@ -25,6 +28,7 @@ class ApplicationPage {
   String path;
   IconData iconData;
   Color? color = Colors.amber;
+  PageRouteInfo pageRouteInfo;
 }
 
 final List<ApplicationPage> pages = [
@@ -32,19 +36,31 @@ final List<ApplicationPage> pages = [
     widget: Container(
       color: Colors.pink[50],
     ),
-    name: "Drink",
+    name: "Paths",
     path: 'list',
-    iconData: Icons.people_outline_sharp,
-    color: Colors.pink,
+    iconData: Icons.list,
+    color: Colors.green,
+    pageRouteInfo: const DashboardLearningPathListRouter(),
   ),
   ApplicationPage(
     widget: Container(
       color: Colors.purple[50],
     ),
-    name: "Favourite",
+    name: "Forks",
     path: 'list',
-    iconData: Icons.people_outline_sharp,
-    color: Colors.purple,
+    iconData: Icons.list_alt,
+    color: Colors.cyan,
+    pageRouteInfo: const DashboardForksRouter(),
+  ),
+  ApplicationPage(
+    widget: Container(
+      color: Colors.purple[50],
+    ),
+    name: "Setting",
+    path: 'list',
+    iconData: Icons.settings,
+    color: Colors.amber,
+    pageRouteInfo: const DashboardSettingsRouter(),
   ),
 ];
 
@@ -63,14 +79,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return BlocBuilder<AuthenticationBloc, AuthenticationState>(
       bloc: locator.get(),
       builder: (context, state) {
+        final theme = context.theme;
         return AutoTabsRouter(
           // list of your tab routes
           // routes used here must be declaraed as children
           // routes of /dashboard
-          routes: const [
-            DashboardLearningPathListRouter(),
-            DashboardProfileRouter(),
-          ],
+          routes: pages.map((e) => e.pageRouteInfo).toList(),
 
           builder: (context, child, animation) {
             // obtain the scoped TabsRouter controller using context
@@ -87,134 +101,138 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     // the passed child is techinaclly our animated selected-tab page
                     child: child,
                   ),
-                  Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 16),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(
-                                sigmaX: 10,
-                                sigmaY: 10,
-                                tileMode: TileMode.mirror,
-                              ),
-                              child: Container(
-                                height: 54,
-                                decoration: BoxDecoration(
-                                  color: Colors.black54,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                                  children: pages.map((page) {
-                                    final index = pages.indexOf(page);
-                                    var isSelected = index == tabsRouter.activeIndex;
-                                    return GestureDetector(
-                                      onTap: () {
-                                        tabsRouter.setActiveIndex(index);
-                                      },
-                                      child: Container(
-                                        margin: const EdgeInsets.symmetric(
-                                          vertical: 4,
-                                        ),
-                                        width: (MediaQuery.of(context).size.width - 240) / 2,
-                                        color: Colors.transparent,
-                                        child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
-                                          Icon(
-                                            page.iconData,
-                                            size: isSelected ? 30 : 20,
-                                            color: isSelected ? page.color : Colors.grey,
-                                          ),
-                                          Text(
-                                            page.name,
-                                            style: TextStyle(
-                                              color: isSelected ? page.color : Colors.grey,
-                                              fontSize: isSelected ? 12 : 10,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          )
-                                        ]),
-                                      ),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            ),
-                          ))),
+                  ButtonNavigationContainer(
+                    backdropColor: theme.scaffoldBackgroundColor.withOpacity(0.7),
+                    tabsRouter: tabsRouter,
+                    navigationItems: pages.map(
+                      (page) {
+                        final index = pages.indexOf(page);
+                        var isSelected = index == tabsRouter.activeIndex;
+                        return ButtonNavigationItemContainer(
+                          accentColor: page.color ?? theme.primaryColor,
+                          disabledColor: theme.disabledColor,
+                          label: page.name,
+                          icon: page.iconData,
+                          onTap: () {
+                            tabsRouter.setActiveIndex(index);
+                          },
+                          index: index,
+                          isSelected: isSelected,
+                        );
+                      },
+                    ).toList(),
+                  ),
                 ],
               ),
-              // bottomNavigationBar: BottomNavigationBar(
-              //   currentIndex: tabsRouter.activeIndex,
-              //   onTap: (index) {
-              //     // here we switch between tabs
-              //     tabsRouter.setActiveIndex(index);
-              //   },
-              //   items: const [
-              //     BottomNavigationBarItem(label: 'List', icon: Icon(Icons.list)),
-              //     BottomNavigationBarItem(label: 'Users', icon: Icon(Icons.people)),
-              //   ],
-              // ),
-              // bottomNavigationBar: FloatingNavigationBar(
-              //   backgroundColor: Colors.black87,
-              //   barHeight: 80.0,
-              //   barWidth: MediaQuery.of(context).size.width - 40.0,
-              //   iconColor: Colors.white,
-              //   textStyle: TextStyle(
-              //     color: Colors.white,
-              //     fontSize: 14.0,
-              //   ),
-              //   iconSize: 20.0,
-              //   indicatorColor: Colors.white,
-              //   indicatorHeight: 5,
-              //   indicatorWidth: 14.0,
-              //   items: [
-              //     NavBarItems(
-              //       icon: Icons.list,
-              //       title: "List",
-              //     ),
-              //     NavBarItems(
-              //       icon: Icons.people,
-              //       title: "Users",
-              //     ),
-              //   ],
-              //   onChanged: (index) {
-              //     tabsRouter.setActiveIndex(index);
-              //   },
-              // ),
-              // bottomNavigationBar: SnakeNavigationBar.color(
-              //   behaviour: SnakeBarBehaviour.floating,
-              //   snakeShape: SnakeShape.circle,
-              //   // shape: bottomBarShape,
-              //   // padding: padding,
-
-              //   // ///configuration for SnakeNavigationBar.color
-              //   snakeViewColor: Colors.black,
-              //   selectedItemColor: Colors.limeAccent,
-              //   unselectedItemColor: Colors.amber,
-
-              //   // ///configuration for SnakeNavigationBar.gradient
-              //   shadowColor: Colors.red,
-              //   // //selectedItemGradient: snakeShape == SnakeShape.indicator ? selectedGradient : null,
-              //   // //unselectedItemGradient: unselectedGradient,
-
-              //   showUnselectedLabels: true,
-              //   showSelectedLabels: true,
-
-              //   currentIndex: tabsRouter.activeIndex,
-              //   onTap: (index) {
-              //     tabsRouter.setActiveIndex(index);
-              //   },
-              //   items: const [
-              //     BottomNavigationBarItem(label: 'List', icon: Icon(Icons.list)),
-              //     BottomNavigationBarItem(label: 'Users', icon: Icon(Icons.people)),
-              //   ],
-              // ),
             );
           },
         );
       },
+    );
+  }
+}
+
+class ButtonNavigationContainer extends StatelessWidget {
+  const ButtonNavigationContainer({
+    Key? key,
+    required this.tabsRouter,
+    this.height = 54,
+    this.backdropColor = Colors.white54,
+    this.borderRadius = 10,
+    required this.navigationItems,
+  }) : super(key: key);
+
+  final TabsRouter tabsRouter;
+  final double height;
+  final Color backdropColor;
+  final double borderRadius;
+  final List<Widget> navigationItems;
+
+  @override
+  Widget build(BuildContext context) {
+    // final gap = MediaQuery.of(context).size.width - (navigationItems.length * 100);
+    // final horizontalMargin = (gap > 16 ? gap / 2 : 16).floorToDouble();
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(borderRadius),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(
+              sigmaX: 10,
+              sigmaY: 10,
+              tileMode: TileMode.mirror,
+            ),
+            child: Container(
+              height: height,
+              width: min(navigationItems.length * 100, 400),
+              decoration: BoxDecoration(
+                color: backdropColor,
+                borderRadius: BorderRadius.circular(borderRadius),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: navigationItems,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ButtonNavigationItemContainer extends StatelessWidget {
+  const ButtonNavigationItemContainer({
+    Key? key,
+    required this.onTap,
+    required this.index,
+    required this.isSelected,
+    required this.icon,
+    required this.accentColor,
+    required this.label,
+    required this.disabledColor,
+  }) : super(key: key);
+
+  final VoidCallback onTap;
+  final int index;
+  final bool isSelected;
+  final IconData icon;
+  final Color accentColor;
+  final Color disabledColor;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.symmetric(
+          vertical: 4,
+        ),
+        width: 64,
+        color: Colors.transparent,
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                size: isSelected ? 30 : 20,
+                color: isSelected ? accentColor : disabledColor,
+              ),
+              Text(
+                label,
+                style: TextStyle(
+                  color: isSelected ? accentColor : disabledColor,
+                  fontSize: isSelected ? 12 : 10,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            ]),
+      ),
     );
   }
 }
