@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:test_routing_flow/component/authentication/bloc/authentication_bloc.dart';
+import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/dashboard_learning_path_list/dashboard_learning_path_list_screen.dart';
 import 'package:test_routing_flow/router/app_locator.dart';
 import 'package:test_routing_flow/router/app_router.dart';
 import 'package:test_routing_flow/router/app_shared_store.dart';
@@ -18,7 +19,7 @@ class AuthenticationGuard extends AutoRouteGuard {
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
     final isAuthenticated =
         await _appSharedStore.get<bool?>(AuthenticationBloc.isAuthenticatedKey) ?? false;
-    print('isAuthenticated $isAuthenticated ${resolver.route.queryParams}');
+    print('AuthenticationGuard isAuthenticated $isAuthenticated ${resolver.route.queryParams}');
     // the navigation is paused until resolver.next() is called with either
     // true to resume/continue navigation or false to abort navigation
 
@@ -39,7 +40,7 @@ class AuthenticatedGuard extends AutoRouteGuard {
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
     final isAuthenticated =
         await _appSharedStore.get<bool?>(AuthenticationBloc.isAuthenticatedKey) ?? false;
-    print('isAuthenticated $isAuthenticated ${resolver.route.queryParams}');
+    print('AuthenticatedGuard isAuthenticated $isAuthenticated ${resolver.route.queryParams}');
     // the navigation is paused until resolver.next() is called with either
     // true to resume/continue navigation or false to abort navigation
 
@@ -48,7 +49,7 @@ class AuthenticatedGuard extends AutoRouteGuard {
       resolver.next(true);
     } else {
       // we redirect the user to our dashboard page
-      router.push(const DashboardRouter());
+      router.push(DashboardRouter());
     }
   }
 }

@@ -23,42 +23,61 @@ const kContentTextStyle = TextStyle(
 
 const kInputDecoration = InputDecoration(
   border: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(25)),
+    borderRadius: BorderRadius.all(Radius.circular(10)),
   ),
   labelStyle: TextStyle(color: Colors.orange),
   enabledBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(25)),
+    borderRadius: BorderRadius.all(Radius.circular(10)),
     borderSide: BorderSide(
       color: Color.fromRGBO(250, 225, 175, 1),
     ),
   ),
   focusedBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(25)),
+    borderRadius: BorderRadius.all(Radius.circular(10)),
     borderSide: BorderSide(color: Colors.orange),
   ),
   errorBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(25)),
+    borderRadius: BorderRadius.all(Radius.circular(10)),
     borderSide: BorderSide(color: Colors.red),
   ),
 );
 
-const kSearchDecoration = InputDecoration(
+const kSearchLightDecoration = InputDecoration(
   border: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(25)),
+    borderRadius: BorderRadius.all(Radius.circular(10)),
   ),
-  labelStyle: TextStyle(color: Colors.black),
   enabledBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(25)),
+    borderRadius: BorderRadius.all(Radius.circular(10)),
     borderSide: BorderSide(
       color: Color.fromARGB(255, 29, 29, 29),
     ),
   ),
   focusedBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(25)),
+    borderRadius: BorderRadius.all(Radius.circular(10)),
     borderSide: BorderSide(color: Color.fromARGB(255, 10, 10, 10)),
   ),
   errorBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(25)),
+    borderRadius: BorderRadius.all(Radius.circular(10)),
+    borderSide: BorderSide(color: Colors.red),
+  ),
+);
+
+const kSearchDarkDecoration = InputDecoration(
+  border: OutlineInputBorder(
+    borderRadius: BorderRadius.all(Radius.circular(10)),
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.all(Radius.circular(10)),
+    borderSide: BorderSide(
+      color: Color.fromARGB(255, 229, 229, 229),
+    ),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.all(Radius.circular(10)),
+    borderSide: BorderSide(color: Color.fromARGB(255, 210, 210, 210)),
+  ),
+  errorBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.all(Radius.circular(10)),
     borderSide: BorderSide(color: Colors.red),
   ),
 );

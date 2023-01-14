@@ -74,12 +74,6 @@ part 'app_router.gr.dart';
         ),
       ],
     ),
-    AutoRoute(
-      name: '${DashboardScreen.routerName}Protected',
-      path: '${DashboardScreen.routerPath}/protected',
-      page: DashboardScreen,
-      guards: [AuthenticationGuard],
-    ),
   ],
 )
 // extend the generated private router

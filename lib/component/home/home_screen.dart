@@ -52,10 +52,6 @@ class _HomeScreenState extends State<HomeScreen> {
           return kLoadingBox;
         }
         return Scaffold(
-          // appBar: kAppBar(
-          //   title: Text(homeData.banner.title),
-          //   backButtonVisibility: BackButtonVisibility.invisible,
-          // ),
           body: Stack(
             children: [
               CachedNetworkImage(

@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:test_routing_flow/component/authentication/bloc/authentication_bloc.dart';
 import 'package:test_routing_flow/component/authentication/service/authentication_service.dart';
+import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/dashboard_learning_path_list/dashboard_learning_path_list_screen.dart';
 import 'package:test_routing_flow/router/app_locator.dart';
 import 'package:test_routing_flow/router/app_navigator.dart';
 import 'package:test_routing_flow/router/app_router.dart';
@@ -24,7 +25,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   PageRouteInfo<dynamic>? _pageRouteInfo;
 
-  PageRouteInfo get pageRouteInfo => _pageRouteInfo ?? const DashboardRouter();
+  PageRouteInfo get pageRouteInfo => _pageRouteInfo ?? DashboardRouter();
   // Creating the setter method
   // to set the input in Field/Property
   setSuccessRoute(PageRouteInfo<dynamic>? route) {

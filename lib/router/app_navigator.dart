@@ -9,6 +9,10 @@ class AppNavigator {
   BuildContext get _context => _navigatorKey.currentContext!;
   StackRouter get stack => AutoRouter.of(_context);
 
+  back() {
+    stack.navigationHistory.back();
+  }
+
   push(PageRouteInfo<dynamic> router) {
     print(AutoRouter.of(_context).navigationHistory.toString());
     stack.push(router);

@@ -12,6 +12,7 @@ import 'package:test_routing_flow/router/app_locator.dart';
 import 'package:test_routing_flow/router/app_router.dart';
 
 import 'package:flutter/material.dart';
+import 'package:test_routing_flow/shared/konstants.dart';
 
 class ApplicationPage {
   ApplicationPage({
@@ -84,11 +85,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
           // list of your tab routes
           // routes used here must be declaraed as children
           // routes of /dashboard
+          homeIndex: 2,
           routes: pages.map((e) => e.pageRouteInfo).toList(),
 
           builder: (context, child, animation) {
             // obtain the scoped TabsRouter controller using context
             final tabsRouter = AutoTabsRouter.of(context);
+
             // Here we're building our Scaffold inside of AutoTabsRouter
             // to access the tabsRouter controller provided in this context
             //
@@ -102,7 +105,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     child: child,
                   ),
                   ButtonNavigationContainer(
-                    backdropColor: theme.scaffoldBackgroundColor.withOpacity(0.7),
+                    backdropColor: theme.scaffoldBackgroundColor.withOpacity(0.9),
                     tabsRouter: tabsRouter,
                     navigationItems: pages.map(
                       (page) {
@@ -136,7 +139,7 @@ class ButtonNavigationContainer extends StatelessWidget {
   const ButtonNavigationContainer({
     Key? key,
     required this.tabsRouter,
-    this.height = 54,
+    this.height = 64,
     this.backdropColor = Colors.white54,
     this.borderRadius = 10,
     required this.navigationItems,
@@ -220,12 +223,12 @@ class ButtonNavigationItemContainer extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                size: isSelected ? 30 : 20,
+                size: isSelected ? 40 : 25,
                 color: isSelected ? accentColor : disabledColor,
               ),
               Text(
                 label,
-                style: TextStyle(
+                style: kHeadingTextStyle.copyWith(
                   color: isSelected ? accentColor : disabledColor,
                   fontSize: isSelected ? 12 : 10,
                   fontWeight: FontWeight.bold,

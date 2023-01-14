@@ -48,12 +48,6 @@ class _$AppRouter extends RootStackRouter {
         child: const DashboardScreen(),
       );
     },
-    DashboardRouterProtected.name: (routeData) {
-      return MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const DashboardScreen(),
-      );
-    },
     DashboardLearningPathListRouter.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
@@ -166,11 +160,6 @@ class _$AppRouter extends RootStackRouter {
             ),
           ],
         ),
-        RouteConfig(
-          DashboardRouterProtected.name,
-          path: '/dashboard/protected',
-          guards: [authenticationGuard],
-        ),
       ];
 }
 
@@ -231,18 +220,6 @@ class DashboardRouter extends PageRouteInfo<void> {
         );
 
   static const String name = 'DashboardRouter';
-}
-
-/// generated route for
-/// [DashboardScreen]
-class DashboardRouterProtected extends PageRouteInfo<void> {
-  const DashboardRouterProtected()
-      : super(
-          DashboardRouterProtected.name,
-          path: '/dashboard/protected',
-        );
-
-  static const String name = 'DashboardRouterProtected';
 }
 
 /// generated route for

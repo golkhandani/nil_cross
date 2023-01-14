@@ -30,7 +30,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     final AppSharedStore sharedStore = locator.get();
     print(sharedStore);
     final isAuthenticated = await sharedStore.get<bool>(isAuthenticatedKey) ?? false;
-    print("isAuthenticated $isAuthenticated");
+    print("isAuthenticated isAuthenticated $isAuthenticated");
     return isAuthenticated;
   }
 

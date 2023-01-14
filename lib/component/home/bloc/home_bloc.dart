@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:test_routing_flow/component/authentication/bloc/authentication_bloc.dart';
 import 'package:test_routing_flow/component/authentication/service/authentication_service.dart';
+import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/dashboard_learning_path_list/dashboard_learning_path_list_screen.dart';
 import 'package:test_routing_flow/component/home/model/home_model.dart';
 import 'package:test_routing_flow/router/app_locator.dart';
 import 'package:test_routing_flow/router/app_navigator.dart';
@@ -54,7 +55,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   _goToDashboard(Emitter<HomeState> emit) {
     emit(state.copyWith(isLoading: true));
-    _appNavigator.replace(const DashboardRouter());
+    _appNavigator.replace(DashboardRouter());
     emit(state.copyWith(isLoading: false));
   }
 }

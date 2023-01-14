@@ -97,20 +97,12 @@ class __$$_HomeEventLoadDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_HomeEventLoadData
-    with DiagnosticableTreeMixin
-    implements _HomeEventLoadData {
+class _$_HomeEventLoadData implements _HomeEventLoadData {
   const _$_HomeEventLoadData();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'HomeEvent.loadData()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'HomeEvent.loadData'));
   }
 
   @override
@@ -213,20 +205,12 @@ class __$$_HomeEventGoToLoginCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_HomeEventGoToLogin
-    with DiagnosticableTreeMixin
-    implements _HomeEventGoToLogin {
+class _$_HomeEventGoToLogin implements _HomeEventGoToLogin {
   const _$_HomeEventGoToLogin();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'HomeEvent.goToLogin()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'HomeEvent.goToLogin'));
   }
 
   @override
@@ -329,20 +313,12 @@ class __$$_HomeEventGoToDashboardCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_HomeEventGoToDashboard
-    with DiagnosticableTreeMixin
-    implements _HomeEventGoToDashboard {
+class _$_HomeEventGoToDashboard implements _HomeEventGoToDashboard {
   const _$_HomeEventGoToDashboard();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'HomeEvent.goToDashboard()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'HomeEvent.goToDashboard'));
   }
 
   @override
@@ -532,7 +508,7 @@ class __$$$$HomeStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$$$HomeState with DiagnosticableTreeMixin implements $$HomeState {
+class _$$$HomeState implements $$HomeState {
   const _$$$HomeState({required this.isLoading, this.home});
 
   @override
@@ -541,17 +517,8 @@ class _$$$HomeState with DiagnosticableTreeMixin implements $$HomeState {
   final Home? home;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'HomeState(isLoading: $isLoading, home: $home)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'HomeState'))
-      ..add(DiagnosticsProperty('isLoading', isLoading))
-      ..add(DiagnosticsProperty('home', home));
   }
 
   @override

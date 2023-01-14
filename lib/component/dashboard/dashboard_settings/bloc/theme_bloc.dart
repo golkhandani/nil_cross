@@ -33,17 +33,11 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
 
     if (themeName == AppTheme.Dark.name) {
       emit(state.copyWith(
-        themeData: ThemeData(
-          brightness: Brightness.dark,
-          textTheme: GoogleFonts.nunitoTextTheme(),
-        ),
+        themeData: ThemeState.darkTheme,
       ));
     } else {
       emit(state.copyWith(
-        themeData: ThemeData(
-          brightness: Brightness.light,
-          textTheme: GoogleFonts.nunitoTextTheme(),
-        ),
+        themeData: ThemeState.whiteTheme,
       ));
     }
     emit(state.copyWith(isLoading: false, themeName: themeName));
@@ -53,9 +47,9 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   Future<void> _switchTheme(emit) async {
     emit(state.copyWith(isLoading: true));
     if (state.themeName == AppTheme.Light.name) {
-      emit(state.copyWith(themeData: ThemeData.dark(), themeName: AppTheme.Dark.name));
+      emit(state.copyWith(themeData: ThemeState.darkTheme, themeName: AppTheme.Dark.name));
     } else {
-      emit(state.copyWith(themeData: ThemeData.light(), themeName: AppTheme.Light.name));
+      emit(state.copyWith(themeData: ThemeState.whiteTheme, themeName: AppTheme.Light.name));
     }
 
     await appSharedStore.set<String>(ThemeBloc.themeStoreKey, state.themeName);
