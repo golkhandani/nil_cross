@@ -1,14 +1,9 @@
-import 'dart:math';
-import 'dart:ui';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_routing_flow/common/breakpoint_extension.dart';
-import 'package:test_routing_flow/common/ui/scrollable_opacity.dart';
+import 'package:test_routing_flow/common/ui/overlay_sliver_appbar.dart';
+import 'package:test_routing_flow/common/ui/safe_area.dart';
 import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/bloc/learning_path_list_bloc.dart';
-import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/model/learning_path_category_model.dart';
 import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/widgets/learning_path_category_items.dart';
 import 'package:test_routing_flow/router/app_locator.dart';
 import 'package:test_routing_flow/router/authentication_gaurd.dart';
@@ -58,102 +53,18 @@ class _DashboardLearningPathListScreenState extends State<DashboardLearningPathL
               body: CustomScrollView(
                 controller: _scrollController,
                 slivers: [
-                  SliverAppBar(
-                    automaticallyImplyLeading: false,
-                    toolbarHeight: 54,
-                    elevation: 0,
+                  SliverPersistAppbar(
+                    backButtonEnable: false,
+                    expandedHeight: 200,
+                    backgroundImage: state.learningPathCategories[0].thumbnail,
+                    title: state.learningPathCategoriesPageTitle,
                     pinned: true,
                     floating: true,
-                    snap: false,
-                    backgroundColor: context.theme.backgroundColor,
-                    expandedHeight: 160,
-                    flexibleSpace: FlexibleSpaceBar(
-                      collapseMode: CollapseMode.parallax,
-                      centerTitle: true,
-                      expandedTitleScale: 1.6,
-                      title: Text(
-                        state.learningPathCategoriesPageTitle!,
-                        style: kTitleTextStyle.copyWith(
-                          fontSize: 16,
-                          color: context.theme.textTheme.titleLarge?.color,
-                        ),
-                      ),
-                      background: Stack(
-                        children: [
-                          Container(
-                            color: context.theme.backgroundColor,
-                            width: context.width,
-                            child: CachedNetworkImage(
-                              fit: BoxFit.cover,
-                              imageUrl: state.learningPathCategories[0].thumbnail,
-                              placeholder: (context, url) => kLoadingBox,
-                              errorWidget: (context, url, error) => const Icon(Icons.error),
-                            ),
-                          ),
-                          BackdropFilter(
-                            filter: ImageFilter.blur(
-                              sigmaX: 10,
-                              sigmaY: 10,
-                              tileMode: TileMode.mirror,
-                            ),
-                            child: Container(
-                              color: context.theme.backgroundColor.withOpacity(0.9),
-                            ),
-                          ),
-                          ScrollableOpacity(
-                            scrollController: _scrollController,
-                            scrollDirection: ScrollDirection.reverse,
-                            hideLimit: 10,
-                            showLimit: 160,
-                            child: Center(
-                              child: Icon(
-                                Icons.library_books,
-                                size: 54,
-                                color: context.theme.iconTheme.color,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                    child: const Center(
+                      child: QuickSearchBox(),
                     ),
                   ),
-                  SliverAppBar(
-                    pinned: true,
-                    floating: false,
-                    snap: false,
-                    expandedHeight: 0,
-                    toolbarHeight: 0,
-                    bottom: AppBar(
-                      elevation: 0,
-                      toolbarHeight: 64,
-                      backgroundColor: context.theme.backgroundColor,
-                      centerTitle: true,
-                      automaticallyImplyLeading: false,
-                      title: Container(
-                        margin: const EdgeInsets.all(16),
-                        child: Center(
-                          child: ConstrainedBox(
-                            constraints: const BoxConstraints(
-                              maxHeight: 48,
-                              minHeight: 48,
-                              minWidth: 320,
-                              maxWidth: 400,
-                            ),
-                            child: TextField(
-                              textAlignVertical: TextAlignVertical.center,
-                              decoration: (context.theme.brightness == Brightness.dark
-                                      ? kSearchDarkDecoration
-                                      : kSearchLightDecoration)
-                                  .copyWith(
-                                hintText: 'Search',
-                                hintStyle: const TextStyle(fontSize: 14),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  const SliverGap(height: 32),
                   ...state.learningPathCategories
                       .map(
                         (learningPathCategory) => LearningPathCategoryItems(
@@ -162,7 +73,7 @@ class _DashboardLearningPathListScreenState extends State<DashboardLearningPathL
                         ),
                       )
                       .toList(),
-                  const NavigationBarSafeArea()
+                  const NavigationBarSliverSafeArea()
                 ],
               ),
             );
@@ -173,15 +84,146 @@ class _DashboardLearningPathListScreenState extends State<DashboardLearningPathL
   }
 }
 
-class NavigationBarSafeArea extends StatelessWidget {
-  const NavigationBarSafeArea({
+class QuickSearchBox extends StatefulWidget {
+  final TextEditingController? controller;
+  final BoxConstraints boxConstraints;
+  final double radius;
+  const QuickSearchBox({
     Key? key,
+    this.controller,
+    this.boxConstraints = const BoxConstraints(
+      maxHeight: 48,
+      minHeight: 48,
+      maxWidth: 400,
+      minWidth: 100,
+    ),
+    this.radius = 10,
+  }) : super(key: key);
+
+  @override
+  State<QuickSearchBox> createState() => _QuickSearchBoxState();
+}
+
+class _QuickSearchBoxState extends State<QuickSearchBox> {
+  late BorderRadius rightRadius;
+  late BorderRadius leftRadius;
+  @override
+  void initState() {
+    rightRadius = BorderRadius.only(
+      topRight: Radius.circular(widget.radius),
+      bottomRight: Radius.circular(widget.radius),
+    );
+    leftRadius = BorderRadius.only(
+      topLeft: Radius.circular(widget.radius),
+      bottomLeft: Radius.circular(widget.radius),
+    );
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      constraints: BoxConstraints(
+        maxHeight: widget.boxConstraints.maxHeight,
+        minHeight: widget.boxConstraints.minHeight,
+        maxWidth: widget.boxConstraints.maxWidth - 48,
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Material(
+              borderRadius: leftRadius,
+              elevation: 10,
+              child: NitTextField(
+                hintText: 'Search',
+                hintTextFontSize: 16,
+                borderRadius: leftRadius,
+              ),
+            ),
+          ),
+          Material(
+            borderRadius: rightRadius,
+            elevation: 10,
+            child: Ink(
+              decoration: BoxDecoration(
+                borderRadius: rightRadius,
+                color: context.theme.primaryColor,
+              ),
+              child: InkWell(
+                borderRadius: rightRadius,
+                highlightColor: context.theme.splashColor,
+                splashColor: context.theme.splashColor,
+                onTap: () => {},
+                child: ClipRRect(
+                  borderRadius: rightRadius,
+                  child: SizedBox(
+                    width: 48,
+                    height: 48,
+                    child: Icon(
+                      Icons.search,
+                      color: context.theme.iconTheme.color!,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class NitTextField extends StatelessWidget {
+  final double radius;
+  final String? hintText;
+  final double hintTextFontSize;
+  final Color enableBoderColor;
+  final Color focusedBoderColor;
+  final Color errorBorderColor;
+  final BorderRadius? borderRadius;
+  final TextEditingController? controller;
+  const NitTextField({
+    Key? key,
+    this.borderRadius,
+    this.enableBoderColor = Colors.transparent,
+    this.focusedBoderColor = Colors.transparent,
+    this.errorBorderColor = Colors.red,
+    this.hintText,
+    this.hintTextFontSize = 14,
+    this.radius = 10,
+    this.controller,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const SliverToBoxAdapter(
-      child: SizedBox(height: 80),
+    return TextField(
+      controller: controller,
+      textAlign: TextAlign.start,
+      textAlignVertical: TextAlignVertical.bottom,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: borderRadius ?? BorderRadius.all(Radius.circular(radius)),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: borderRadius ?? BorderRadius.all(Radius.circular(radius)),
+          borderSide: BorderSide(
+            color: enableBoderColor,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: borderRadius ?? BorderRadius.all(Radius.circular(radius)),
+          borderSide: BorderSide(color: focusedBoderColor),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: borderRadius ?? BorderRadius.all(Radius.circular(radius)),
+          borderSide: BorderSide(color: errorBorderColor),
+        ),
+      ).copyWith(
+        hintText: hintText,
+        hintStyle: kContentTextStyle.copyWith(fontSize: hintTextFontSize),
+      ),
     );
   }
 }

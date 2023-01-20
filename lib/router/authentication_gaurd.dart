@@ -19,7 +19,6 @@ class AuthenticationGuard extends AutoRouteGuard {
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
     final isAuthenticated =
         await _appSharedStore.get<bool?>(AuthenticationBloc.isAuthenticatedKey) ?? false;
-    print('AuthenticationGuard isAuthenticated $isAuthenticated ${resolver.route.queryParams}');
     // the navigation is paused until resolver.next() is called with either
     // true to resume/continue navigation or false to abort navigation
 
@@ -40,7 +39,6 @@ class AuthenticatedGuard extends AutoRouteGuard {
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
     final isAuthenticated =
         await _appSharedStore.get<bool?>(AuthenticationBloc.isAuthenticatedKey) ?? false;
-    print('AuthenticatedGuard isAuthenticated $isAuthenticated ${resolver.route.queryParams}');
     // the navigation is paused until resolver.next() is called with either
     // true to resume/continue navigation or false to abort navigation
 

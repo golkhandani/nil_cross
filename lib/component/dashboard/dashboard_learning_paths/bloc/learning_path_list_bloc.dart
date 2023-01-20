@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/model/learning_path_category_model.dart';
+import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/model/learning_path_complete_model.dart';
 import 'package:test_routing_flow/router/app_locator.dart';
 import 'package:test_routing_flow/router/app_navigator.dart';
 import 'package:test_routing_flow/router/app_router.dart';
@@ -16,23 +17,133 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
         selectLearningPath: (id) => _selectLearningPath(id, emit),
         loadSelectLearningPath: (id) => _loadselectLearningPath(id, emit),
         load: () => _load(emit),
+        getLearningPath: (id) => _getLearningPath(id, emit),
       );
     });
   }
 
+  _getLearningPath(String id, Emitter<LearningPathListState> emit) async {
+    await Future.delayed(const Duration(milliseconds: 2000));
+    late LearningPathComplete? learningPathComplete;
+    learningPathComplete = LearningPathComplete.fromJson({
+      "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
+      "title": "Raven",
+      "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
+      "summary":
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
+      "score": 1,
+      "duration": "10 days",
+      "counts": {"steps": 10, "likes": 1000, "notLikes": 3000, "forks": 20},
+      "steps": [
+        {
+          "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
+          "title": "Raven",
+          "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
+          "summary":
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
+          "htmlContent": "",
+          "createdAt": "2018-12-10T13:49:51.141Z",
+          "updatedAt": "2018-12-10T13:49:51.141Z"
+        },
+        {
+          "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
+          "title": "Raven",
+          "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
+          "summary":
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
+          "htmlContent": "",
+          "createdAt": "2018-12-10T13:49:51.141Z",
+          "updatedAt": "2018-12-10T13:49:51.141Z"
+        },
+        {
+          "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
+          "title": "Raven",
+          "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
+          "summary":
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
+          "htmlContent": "",
+          "createdAt": "2018-12-10T13:49:51.141Z",
+          "updatedAt": "2018-12-10T13:49:51.141Z"
+        },
+        {
+          "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
+          "title": "Raven",
+          "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
+          "summary":
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
+          "htmlContent": "",
+          "createdAt": "2018-12-10T13:49:51.141Z",
+          "updatedAt": "2018-12-10T13:49:51.141Z"
+        },
+        {
+          "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
+          "title": "Raven",
+          "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
+          "summary":
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
+          "htmlContent": "",
+          "createdAt": "2018-12-10T13:49:51.141Z",
+          "updatedAt": "2018-12-10T13:49:51.141Z"
+        },
+        {
+          "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
+          "title": "Raven",
+          "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
+          "summary":
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
+          "htmlContent": "",
+          "createdAt": "2018-12-10T13:49:51.141Z",
+          "updatedAt": "2018-12-10T13:49:51.141Z"
+        },
+        {
+          "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
+          "title": "Raven",
+          "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
+          "summary":
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
+          "htmlContent": "",
+          "createdAt": "2018-12-10T13:49:51.141Z",
+          "updatedAt": "2018-12-10T13:49:51.141Z"
+        },
+        {
+          "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
+          "title": "Raven",
+          "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
+          "summary":
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
+          "htmlContent": "",
+          "createdAt": "2018-12-10T13:49:51.141Z",
+          "updatedAt": "2018-12-10T13:49:51.141Z"
+        }
+      ],
+      "author": {
+        "id": "id",
+        "username": "username",
+        "name": "name",
+        "bio": "bio",
+        "email": "email",
+        "expertise": ["expertise", "expertise", "expertise", "expertise"],
+        "createdAt": "2018-12-10T13:49:51.141Z",
+        "updatedAt": "2018-12-10T13:49:51.141Z"
+      },
+      "createdAt": "2018-12-10T13:49:51.141Z",
+      "updatedAt": "2018-12-10T13:49:51.141Z"
+    });
+    emit(state.copyWith(learningPathComplete: learningPathComplete));
+  }
+
   _loadselectLearningPath(String id, Emitter<LearningPathListState> emit) async {
-    print(id);
     emit(LearningPathListState.loading());
     await _load(emit);
     late LearningPathSummary? selected;
-    print(id);
     state.learningPathCategories.firstWhere((e) {
-      print(e);
       selected = e.items.firstWhere((element) => element?.id == id, orElse: () => null);
       return selected != null ? true : false;
     });
-    emit(state.copyWith(selectedLearningPath: selected));
+    emit(state.copyWith(learningPathSummary: selected));
+
     locator.get<AppNavigator>().push(DashboardLearningPathSingleRouter(id: id));
+    await _getLearningPath(id, emit);
   }
 
   _selectLearningPath(String id, Emitter<LearningPathListState> emit) async {
@@ -41,7 +152,7 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
       selected = e.items.firstWhere((element) => element?.id == id, orElse: () => null);
       return selected != null ? true : false;
     });
-    emit(state.copyWith(selectedLearningPath: selected));
+    emit(state.copyWith(learningPathSummary: selected));
     locator.get<AppNavigator>().push(DashboardLearningPathSingleRouter(id: id));
   }
 
@@ -64,7 +175,8 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
             "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
             "title": "Raven",
             "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
-            "summary": "Bypass 2 Cor Art from Aorta with Autol Vn, Open Approach",
+            "summary":
+                '''Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor tempus, nec sollicitudin leo hendrerit. Donec ut tortor malesuada, imperdiet augue nec, maximus ipsum. In ac sem nec sem efficitur lobortis. Curabitur rutrum lorem in tincidunt lobortis. Mauris facilisis dui vel eros tincidunt, vitae lacinia ex vehicula. Morbi aliquam, lorem eget fermentum eleifend, lectus felis semper arcu, quis vulputate mi risus quis nibh. Vestibulum sed ante egestas lorem tempus consequat. In venenatis tortor felis, non malesuada mauris venenatis vitae. Aliquam id leo enim. Quisque vitae porta orci, ut aliquam lacus. Aenean vitae tortor elit.''',
             "score": 1
           },
           {

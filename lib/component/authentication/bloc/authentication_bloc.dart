@@ -26,11 +26,8 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   }
 
   Future<bool?> isAuthenticated() async {
-    print("isAuthenticated started");
     final AppSharedStore sharedStore = locator.get();
-    print(sharedStore);
     final isAuthenticated = await sharedStore.get<bool>(isAuthenticatedKey) ?? false;
-    print("isAuthenticated isAuthenticated $isAuthenticated");
     return isAuthenticated;
   }
 
@@ -49,14 +46,11 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   _logout(Emitter<AuthenticationState> emit) async {
     // show modal for confirmation
     final AppNavigator appNavigator = locator.get();
-    print('logout!');
     // appNavigator
     final bool confirmation = await appNavigator.showAlertDialog(
           const LogoutConfirmationDialog(),
         ) ??
         false;
-
-    print('logout confirmation!: $confirmation');
 
     if (!confirmation) {
       return;

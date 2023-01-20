@@ -44,7 +44,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         "about": {"text": "about"}
       }),
     ));
-    //  print(_authenticationBloc.state.isLoggedIn);
   }
 
   _goToLogin(Emitter<HomeState> emit) {

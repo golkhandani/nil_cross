@@ -14,12 +14,10 @@ class AppNavigator {
   }
 
   push(PageRouteInfo<dynamic> router) {
-    print(AutoRouter.of(_context).navigationHistory.toString());
     stack.push(router);
   }
 
   replace(PageRouteInfo<dynamic> router) {
-    print(AutoRouter.of(_context).navigationHistory.toString());
     stack.replace(router);
   }
 

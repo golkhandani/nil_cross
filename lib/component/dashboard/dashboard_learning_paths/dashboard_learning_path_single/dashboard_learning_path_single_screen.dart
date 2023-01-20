@@ -3,13 +3,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_routing_flow/common/breakpoint_extension.dart';
+import 'package:test_routing_flow/common/ui/overlay_sliver_appbar.dart';
+import 'package:test_routing_flow/common/ui/safe_area.dart';
 import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/bloc/learning_path_list_bloc.dart';
 import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/dashboard_learning_path_list/dashboard_learning_path_list_screen.dart';
 import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/model/learning_path_category_model.dart';
+import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/model/learning_path_complete_model.dart';
 import 'package:test_routing_flow/router/app_locator.dart';
 import 'package:test_routing_flow/router/app_navigator.dart';
-import 'package:test_routing_flow/router/app_router.dart';
 import 'package:test_routing_flow/shared/konstants.dart';
+import 'package:timelines/timelines.dart';
 
 class DashboardLearningPathSingleScreen extends StatefulWidget {
   static const routerName = 'DashboardLearningPathSingleRouter';
@@ -24,15 +27,14 @@ class DashboardLearningPathSingleScreen extends StatefulWidget {
 }
 
 class _DashboardLearningPathSingleScreenState extends State<DashboardLearningPathSingleScreen> {
-  late LearningPathSummary _learningPathSummary;
+  LearningPathSummary? _learningPathSummary;
+  LearningPathComplete? _learningPathComplete;
   final LearningPathListBloc _learningPathListBloc = locator.get();
   @override
   void initState() {
-    print(_learningPathListBloc.state.selectedLearningPath == null);
-    if (_learningPathListBloc.state.selectedLearningPath != null) {
-      _learningPathSummary = _learningPathListBloc.state.selectedLearningPath!;
+    if (_learningPathListBloc.state.learningPathSummary != null) {
+      _learningPathSummary = _learningPathListBloc.state.learningPathSummary!;
     } else {
-      print(widget.id);
       _learningPathListBloc.add(LearningPathListEvent.loadSelectLearningPath(widget.id));
     }
 
@@ -44,135 +46,95 @@ class _DashboardLearningPathSingleScreenState extends State<DashboardLearningPat
     return BlocBuilder<LearningPathListBloc, LearningPathListState>(
       bloc: _learningPathListBloc,
       builder: (context, state) {
-        if (state.isLoading || state.selectedLearningPath == null) {
+        if (state.isLoading || state.learningPathSummary == null) {
           return kLoadingBox;
         }
-        final data = state.selectedLearningPath!;
-        // print("Navigator.canPop(context)) ${Navigator.canPop(context)}");
+        _learningPathSummary = state.learningPathSummary!;
+
+        if (state.learningPathComplete != null) {
+          _learningPathComplete = state.learningPathComplete!;
+        }
+
         return Scaffold(
-          body:
-              // Container(
-              //   color: Colors.red,
-              // ),
-              CustomScrollView(
-            slivers: [
-              newMethod(),
-              SliverAppBar(
-                toolbarHeight: 0,
-                collapsedHeight: 54,
-                expandedHeight: 240,
-                backgroundColor: Colors.amber,
-                automaticallyImplyLeading: true,
-                leading: IconButton(
-                  icon: Icon(
-                    Icons.read_more,
-                    color: Colors.red,
-                  ),
-                  onPressed: () {},
-                ),
-                // bottom: AppBar(),
+          body: NestedScrollView(
+            headerSliverBuilder: (context, innerBoxIsScrolled) => [
+              SliverPersistAppbar(
+                backButtonEnable: true,
+                floating: innerBoxIsScrolled,
+                backButtonColor: context.theme.primaryColorLight,
+                backgroundColor: context.theme.backgroundColor,
+                expandedHeight: 56,
+                collapsedHeight: 56.0,
+                title: _learningPathSummary?.title,
               ),
-              SliverToBoxAdapter(
-                child: SizedBox(
-                  height: 1000,
-                ),
-              ),
-              // const NavigationBarSafeArea()
             ],
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Gap(height: 16),
+                    _learningPathComplete != null
+                        ? Text.rich(TextSpan(text: _learningPathComplete?.summary))
+                        : kLoadingBox,
+                    const Gap(height: 16),
+                    FixedTimeline.tileBuilder(
+                      key: GlobalKey(),
+                      clipBehavior: Clip.none,
+                      builder: TimelineTileBuilder.connected(
+                        indicatorBuilder: (context, index) {
+                          return const Icon(
+                            Icons.home_work_outlined,
+                            color: Colors.red,
+                          );
+                        },
+
+                        connectorBuilder: (context, index, type) {
+                          return Connector.dashedLine(
+                            gap: 4,
+                            dash: 4,
+                            thickness: 4,
+                            color: Colors.red,
+                          );
+                        },
+                        contentsAlign: ContentsAlign.basic,
+                        nodePositionBuilder: (context, index) => 0,
+                        addRepaintBoundaries: true,
+                        indicatorPositionBuilder: (context, index) => 0.1,
+                        contentsBuilder: (context, index) {
+                          LearningPathStep step = _learningPathComplete!.steps![index]!;
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Material(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.red,
+                              elevation: 10,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                width: context.width,
+                                height: 200,
+                                child: Text(step.title!),
+                                // color: Colors.red,
+                              ),
+                            ),
+                          );
+                        },
+                        // connectorStyleBuilder: (context, index) => ConnectorStyle.dashedLine,
+                        // indicatorStyleBuilder: (context, index) => IndicatorStyle.outlined,
+                        itemCount: _learningPathComplete?.steps?.length ?? 0,
+                      ),
+                    ),
+                    const NavigationBarSafeArea(),
+                  ],
+                ),
+              ),
+            ),
           ),
         );
       },
     );
   }
-
-  NewWidget newMethod() => const NewWidget();
-}
-
-class NewWidget extends StatelessWidget {
-  const NewWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverPersistentHeader(
-      delegate: MySliverAppBar(expandedHeight: 200),
-      pinned: true,
-      floating: true,
-    );
-  }
-}
-
-class MySliverAppBar extends SliverPersistentHeaderDelegate {
-  final double expandedHeight;
-
-  MySliverAppBar({required this.expandedHeight});
-
-  @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    final navigator = locator.get<AppNavigator>();
-    // print(navigator.stack.canNavigateBack);
-    // print(navigator.stack.hasPagelessTopRoute);
-    // print(navigator.stack.parentAsStackRouter);
-    // print('');
-    // navigator.stack.pop(context);
-    return Stack(
-      fit: StackFit.expand,
-      clipBehavior: Clip.none,
-      children: [
-        Image.network(
-          "https://images.pexels.com/photos/396547/pexels-photo-396547.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-          fit: BoxFit.cover,
-        ),
-        Center(
-          child: Opacity(
-            opacity: shrinkOffset / expandedHeight,
-            child: Text(
-              "MySliverAppBar",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w700,
-                fontSize: 23,
-              ),
-            ),
-          ),
-        ),
-        Positioned(
-          top: expandedHeight / 2 - shrinkOffset,
-          left: MediaQuery.of(context).size.width / 4,
-          child: Opacity(
-            opacity: (1 - shrinkOffset / expandedHeight),
-            child: Card(
-              elevation: 10,
-              child: SizedBox(
-                height: expandedHeight,
-                width: MediaQuery.of(context).size.width / 2,
-                child: FlutterLogo(),
-              ),
-            ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.topLeft,
-          child: BackButton(
-            onPressed: () => {
-              navigator.back(),
-            },
-            color: Colors.red,
-            // navigator
-            //     .push(DashboardRouter(page: DashboardLearningPathListScreen.routerPath)),
-          ),
-        ),
-      ],
-    );
-  }
-
-  @override
-  double get maxExtent => expandedHeight;
-
-  @override
-  double get minExtent => kToolbarHeight;
-
-  @override
-  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
 }

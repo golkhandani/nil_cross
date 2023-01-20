@@ -139,7 +139,7 @@ class ButtonNavigationContainer extends StatelessWidget {
   const ButtonNavigationContainer({
     Key? key,
     required this.tabsRouter,
-    this.height = 64,
+    this.height = 48,
     this.backdropColor = Colors.white54,
     this.borderRadius = 10,
     required this.navigationItems,
@@ -171,7 +171,7 @@ class ButtonNavigationContainer extends StatelessWidget {
               height: height,
               width: min(navigationItems.length * 100, 400),
               decoration: BoxDecoration(
-                color: backdropColor,
+                color: context.theme.backgroundColor.withOpacity(0.7),
                 borderRadius: BorderRadius.circular(borderRadius),
               ),
               child: Row(
@@ -223,14 +223,14 @@ class ButtonNavigationItemContainer extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                size: isSelected ? 40 : 25,
+                size: isSelected ? 24 : 20,
                 color: isSelected ? accentColor : disabledColor,
               ),
               Text(
                 label,
                 style: kHeadingTextStyle.copyWith(
                   color: isSelected ? accentColor : disabledColor,
-                  fontSize: isSelected ? 12 : 10,
+                  fontSize: isSelected ? 12 : 8,
                   fontWeight: FontWeight.bold,
                 ),
               )

@@ -10,7 +10,6 @@ class AuthenticationService {
   refreshIsAuthenticated() async {
     final AppSharedStore sharedStore = locator.get();
     final isAuthenticated = await sharedStore.get<bool>(isAuthenticatedKey) ?? false;
-    print("isAuthenticated $isAuthenticated");
     _isAuthenticated = isAuthenticated;
     return isAuthenticated;
   }

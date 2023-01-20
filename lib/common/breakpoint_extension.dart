@@ -45,4 +45,5 @@ extension BuildContextExtension on BuildContext {
   bool get isLarge => 1008 < virtualWidth;
 
   ThemeData get theme => Theme.of(this);
+  TextStyle get textTheme => theme.textTheme.bodyMedium!;
 }

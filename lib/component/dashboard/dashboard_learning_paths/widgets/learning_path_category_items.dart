@@ -54,7 +54,7 @@ class _LearningPathCategoryItemsState extends State<LearningPathCategoryItems> {
                       if (learningPath == null) {
                         return kLoadingBox;
                       }
-                      double randomFactor = 1.5 + Random().nextInt(120) / 100;
+                      double randomFactor = 2.1;
                       return LearningPathItemCard(
                         learningPath: learningPath,
                         height: cardHeight,
