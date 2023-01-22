@@ -31,7 +31,6 @@ class _DashboardLearningPathListScreenState
     if (_bloc.state.learningPathCategories.isEmpty) {
       _bloc.add(const LearningPathListEvent.load());
     }
-
     super.initState();
   }
 

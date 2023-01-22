@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:test_routing_flow/common/breakpoint_extension.dart';
-import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/model/learning_path_category_model.dart';
+import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/model/categories_feature_list_model.dart';
 import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/widgets/learning_path_item_card.dart';
 import 'package:test_routing_flow/shared/konstants.dart';
 
@@ -16,7 +16,8 @@ class LearningPathCategoryItems extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<LearningPathCategoryItems> createState() => _LearningPathCategoryItemsState();
+  State<LearningPathCategoryItems> createState() =>
+      _LearningPathCategoryItemsState();
 }
 
 class _LearningPathCategoryItemsState extends State<LearningPathCategoryItems> {

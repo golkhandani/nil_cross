@@ -18,7 +18,9 @@ class APIResponse<T> with _$APIResponse {
   }) = _APIResponse;
 
   factory APIResponse.fromJson(
-          Map<String, dynamic> json, T Function(Object?) fromJsonT) =>
+    Map<String, dynamic> json,
+    T Function(dynamic) fromJsonT,
+  ) =>
       _$APIResponseFromJson(json, fromJsonT);
 }
 

@@ -7,7 +7,7 @@ import 'package:test_routing_flow/common/ui/overlay_sliver_appbar.dart';
 import 'package:test_routing_flow/common/ui/safe_area.dart';
 import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/bloc/learning_path_list_bloc.dart';
 import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/dashboard_learning_path_list/dashboard_learning_path_list_screen.dart';
-import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/model/learning_path_category_model.dart';
+import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/model/categories_feature_list_model.dart';
 import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/model/learning_path_complete_model.dart';
 import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/widgets/learning_path_item_step_card.dart';
 import 'package:test_routing_flow/router/app_locator.dart';

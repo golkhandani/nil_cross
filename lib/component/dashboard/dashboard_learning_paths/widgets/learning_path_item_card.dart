@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:test_routing_flow/common/breakpoint_extension.dart';
 import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/bloc/learning_path_list_bloc.dart';
-import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/model/learning_path_category_model.dart';
+import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/model/categories_feature_list_model.dart';
 import 'package:test_routing_flow/router/app_locator.dart';
 import 'package:test_routing_flow/shared/konstants.dart';
 
@@ -63,8 +63,10 @@ class _LearningPathItemCardState extends State<LearningPathItemCard> {
                                     child: IntrinsicHeight(
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(widget.borderRadius),
-                                          bottomRight: Radius.circular(widget.borderRadius),
+                                          bottomLeft: Radius.circular(
+                                              widget.borderRadius),
+                                          bottomRight: Radius.circular(
+                                              widget.borderRadius),
                                         ),
                                         child: Container(
                                           width: double.infinity,
@@ -73,8 +75,10 @@ class _LearningPathItemCardState extends State<LearningPathItemCard> {
                                               begin: Alignment.centerRight,
                                               end: Alignment.centerLeft,
                                               colors: [
-                                                context.theme.cardColor.withOpacity(0.1),
-                                                context.theme.cardColor.withOpacity(0.8),
+                                                context.theme.cardColor
+                                                    .withOpacity(0.1),
+                                                context.theme.cardColor
+                                                    .withOpacity(0.8),
                                               ],
                                             ),
                                           ),
@@ -86,19 +90,27 @@ class _LearningPathItemCardState extends State<LearningPathItemCard> {
                                                 tileMode: TileMode.mirror,
                                               ),
                                               child: Padding(
-                                                padding: const EdgeInsets.all(16),
+                                                padding:
+                                                    const EdgeInsets.all(16),
                                                 child: Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
                                                   children: [
                                                     FittedBox(
                                                       fit: BoxFit.fitWidth,
                                                       child: Text(
-                                                        widget.learningPath.title,
+                                                        widget
+                                                            .learningPath.title,
                                                         maxLines: 1,
-                                                        style: kTitleTextStyle.copyWith(
+                                                        style: kTitleTextStyle
+                                                            .copyWith(
                                                           color: context
-                                                              .theme.textTheme.bodyMedium!.color,
+                                                              .theme
+                                                              .textTheme
+                                                              .bodyMedium!
+                                                              .color,
                                                         ),
                                                       ),
                                                     ),
@@ -113,9 +125,11 @@ class _LearningPathItemCardState extends State<LearningPathItemCard> {
                                   ),
                                   Positioned.fill(
                                     child: InkWell(
-                                      splashColor: context.theme.primaryColor.withOpacity(0.5),
+                                      splashColor: context.theme.primaryColor
+                                          .withOpacity(0.5),
                                       onTap: () => _bloc.add(
-                                        LearningPathListEvent.selectLearningPath(
+                                        LearningPathListEvent
+                                            .selectLearningPath(
                                           widget.learningPath.id,
                                         ),
                                       ),
@@ -127,7 +141,8 @@ class _LearningPathItemCardState extends State<LearningPathItemCard> {
                           );
                         },
                         placeholder: (context, url) => kLoadingBox,
-                        errorWidget: (context, url, error) => const Icon(Icons.error),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
                       ),
                     ),
                   ],
