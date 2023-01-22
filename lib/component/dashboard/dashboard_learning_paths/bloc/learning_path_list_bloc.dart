@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/model/learning_path_category_model.dart';
 import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/model/learning_path_complete_model.dart';
+import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/repo/categories.dart';
 import 'package:test_routing_flow/router/app_locator.dart';
 import 'package:test_routing_flow/router/app_navigator.dart';
 import 'package:test_routing_flow/router/app_router.dart';
@@ -24,6 +25,7 @@ class LearningPathListBloc
   }
 
   _getLearningPath(String id, Emitter<LearningPathListState> emit) async {
+    await getHttp();
     emit(state.copyWith(
       isLoadingLearningPathComplete: true,
       learningPathComplete: null,
