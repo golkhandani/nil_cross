@@ -23,6 +23,7 @@ class ThemeState with _$ThemeState {
     textTheme: GoogleFonts.nunitoTextTheme(),
     backgroundColor: Colors.white,
     primaryColor: Colors.amber,
+    primaryColorLight: Colors.black,
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -30,6 +31,7 @@ class ThemeState with _$ThemeState {
     textTheme: GoogleFonts.nunitoTextTheme().apply(bodyColor: Colors.white),
     backgroundColor: Colors.black,
     primaryColor: Colors.amber,
+    primaryColorLight: Colors.white,
   );
   factory ThemeState({
     @Default(true) bool isLoading,

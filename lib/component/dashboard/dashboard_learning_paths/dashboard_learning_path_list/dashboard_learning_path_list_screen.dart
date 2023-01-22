@@ -15,10 +15,12 @@ class DashboardLearningPathListScreen extends StatefulWidget {
   const DashboardLearningPathListScreen({super.key});
 
   @override
-  State<DashboardLearningPathListScreen> createState() => _DashboardLearningPathListScreenState();
+  State<DashboardLearningPathListScreen> createState() =>
+      _DashboardLearningPathListScreenState();
 }
 
-class _DashboardLearningPathListScreenState extends State<DashboardLearningPathListScreen>
+class _DashboardLearningPathListScreenState
+    extends State<DashboardLearningPathListScreen>
     with AuthenticationGuardMixin {
   final LearningPathListBloc _bloc = locator.get();
   final ScrollController _scrollController = ScrollController();
@@ -38,46 +40,50 @@ class _DashboardLearningPathListScreenState extends State<DashboardLearningPathL
     return BlocBuilder<LearningPathListBloc, LearningPathListState>(
       bloc: _bloc,
       builder: (context, state) {
-        return Scaffold(
-          body: Builder(builder: (context) {
-            if (state.isLoading && state.learningPaths.isEmpty) {
-              return kLoadingBox;
-            }
-            if (state.isLoading == false && state.learningPathCategories.isEmpty) {
-              return kNotFoundBox;
-            }
-            return NestedScrollView(
-              headerSliverBuilder: (context, innerBoxIsScrolled) {
-                return [];
-              },
-              body: CustomScrollView(
-                controller: _scrollController,
-                slivers: [
-                  SliverPersistAppbar(
-                    backButtonEnable: false,
-                    expandedHeight: 200,
-                    backgroundImage: state.learningPathCategories[0].thumbnail,
-                    title: state.learningPathCategoriesPageTitle,
-                    pinned: true,
-                    floating: true,
-                    child: const Center(
-                      child: QuickSearchBox(),
+        return SafeArea(
+          child: Scaffold(
+            body: Builder(builder: (context) {
+              if (state.isLoading && state.learningPaths.isEmpty) {
+                return kLoadingBox;
+              }
+              if (state.isLoading == false &&
+                  state.learningPathCategories.isEmpty) {
+                return kNotFoundBox;
+              }
+              return NestedScrollView(
+                headerSliverBuilder: (context, innerBoxIsScrolled) {
+                  return [];
+                },
+                body: CustomScrollView(
+                  controller: _scrollController,
+                  slivers: [
+                    SliverPersistAppbar(
+                      backButtonEnable: false,
+                      expandedHeight: 200,
+                      backgroundImage:
+                          state.learningPathCategories[0].thumbnail,
+                      title: state.learningPathCategoriesPageTitle,
+                      pinned: true,
+                      floating: true,
+                      child: const Center(
+                        child: QuickSearchBox(),
+                      ),
                     ),
-                  ),
-                  const SliverGap(height: 32),
-                  ...state.learningPathCategories
-                      .map(
-                        (learningPathCategory) => LearningPathCategoryItems(
-                          categoryTitle: learningPathCategory.title,
-                          learningPaths: learningPathCategory.items,
-                        ),
-                      )
-                      .toList(),
-                  const NavigationBarSliverSafeArea()
-                ],
-              ),
-            );
-          }),
+                    const SliverGap(height: 32),
+                    ...state.learningPathCategories
+                        .map(
+                          (learningPathCategory) => LearningPathCategoryItems(
+                            categoryTitle: learningPathCategory.title,
+                            learningPaths: learningPathCategory.items,
+                          ),
+                        )
+                        .toList(),
+                    const NavigationBarSliverSafeArea()
+                  ],
+                ),
+              );
+            }),
+          ),
         );
       },
     );
@@ -204,20 +210,24 @@ class NitTextField extends StatelessWidget {
       textAlignVertical: TextAlignVertical.bottom,
       decoration: InputDecoration(
         border: OutlineInputBorder(
-          borderRadius: borderRadius ?? BorderRadius.all(Radius.circular(radius)),
+          borderRadius:
+              borderRadius ?? BorderRadius.all(Radius.circular(radius)),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: borderRadius ?? BorderRadius.all(Radius.circular(radius)),
+          borderRadius:
+              borderRadius ?? BorderRadius.all(Radius.circular(radius)),
           borderSide: BorderSide(
             color: enableBoderColor,
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: borderRadius ?? BorderRadius.all(Radius.circular(radius)),
+          borderRadius:
+              borderRadius ?? BorderRadius.all(Radius.circular(radius)),
           borderSide: BorderSide(color: focusedBoderColor),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: borderRadius ?? BorderRadius.all(Radius.circular(radius)),
+          borderRadius:
+              borderRadius ?? BorderRadius.all(Radius.circular(radius)),
           borderSide: BorderSide(color: errorBorderColor),
         ),
       ).copyWith(

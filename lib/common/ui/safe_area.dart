@@ -7,18 +7,19 @@ class NavigationBarSliverSafeArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SliverGap(height: 80);
+    return const SliverGap(height: NavigationBarSafeArea.height);
   }
 }
 
 class NavigationBarSafeArea extends StatelessWidget {
+  static const double height = 80;
   const NavigationBarSafeArea({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Gap(height: 80);
+    return const Gap(height: NavigationBarSafeArea.height);
   }
 }
 

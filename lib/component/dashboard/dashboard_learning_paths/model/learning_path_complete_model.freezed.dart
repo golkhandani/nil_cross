@@ -894,13 +894,13 @@ LearningPathStep _$LearningPathStepFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LearningPathStep {
-  String? get id => throw _privateConstructorUsedError;
-  String? get title => throw _privateConstructorUsedError;
-  String? get thumbnail => throw _privateConstructorUsedError;
-  String? get summary => throw _privateConstructorUsedError;
-  String? get htmlContent => throw _privateConstructorUsedError;
-  DateTime? get createdAt => throw _privateConstructorUsedError;
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  String get thumbnail => throw _privateConstructorUsedError;
+  String get summary => throw _privateConstructorUsedError;
+  String get htmlContent => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -915,13 +915,13 @@ abstract class $LearningPathStepCopyWith<$Res> {
       _$LearningPathStepCopyWithImpl<$Res, LearningPathStep>;
   @useResult
   $Res call(
-      {String? id,
-      String? title,
-      String? thumbnail,
-      String? summary,
-      String? htmlContent,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      {String id,
+      String title,
+      String thumbnail,
+      String summary,
+      String htmlContent,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
@@ -937,43 +937,43 @@ class _$LearningPathStepCopyWithImpl<$Res, $Val extends LearningPathStep>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? title = freezed,
-    Object? thumbnail = freezed,
-    Object? summary = freezed,
-    Object? htmlContent = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
+    Object? id = null,
+    Object? title = null,
+    Object? thumbnail = null,
+    Object? summary = null,
+    Object? htmlContent = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      title: freezed == title
+              as String,
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      thumbnail: freezed == thumbnail
+              as String,
+      thumbnail: null == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
-              as String?,
-      summary: freezed == summary
+              as String,
+      summary: null == summary
           ? _value.summary
           : summary // ignore: cast_nullable_to_non_nullable
-              as String?,
-      htmlContent: freezed == htmlContent
+              as String,
+      htmlContent: null == htmlContent
           ? _value.htmlContent
           : htmlContent // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdAt: freezed == createdAt
+              as String,
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
+              as DateTime,
+      updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
     ) as $Val);
   }
 }
@@ -987,13 +987,13 @@ abstract class _$$_LearningPathStepCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? id,
-      String? title,
-      String? thumbnail,
-      String? summary,
-      String? htmlContent,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      {String id,
+      String title,
+      String thumbnail,
+      String summary,
+      String htmlContent,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
@@ -1007,43 +1007,43 @@ class __$$_LearningPathStepCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? title = freezed,
-    Object? thumbnail = freezed,
-    Object? summary = freezed,
-    Object? htmlContent = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
+    Object? id = null,
+    Object? title = null,
+    Object? thumbnail = null,
+    Object? summary = null,
+    Object? htmlContent = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_$_LearningPathStep(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      title: freezed == title
+              as String,
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      thumbnail: freezed == thumbnail
+              as String,
+      thumbnail: null == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
-              as String?,
-      summary: freezed == summary
+              as String,
+      summary: null == summary
           ? _value.summary
           : summary // ignore: cast_nullable_to_non_nullable
-              as String?,
-      htmlContent: freezed == htmlContent
+              as String,
+      htmlContent: null == htmlContent
           ? _value.htmlContent
           : htmlContent // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdAt: freezed == createdAt
+              as String,
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
+              as DateTime,
+      updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
     ));
   }
 }
@@ -1064,19 +1064,19 @@ class _$_LearningPathStep implements _LearningPathStep {
       _$$_LearningPathStepFromJson(json);
 
   @override
-  final String? id;
+  final String id;
   @override
-  final String? title;
+  final String title;
   @override
-  final String? thumbnail;
+  final String thumbnail;
   @override
-  final String? summary;
+  final String summary;
   @override
-  final String? htmlContent;
+  final String htmlContent;
   @override
-  final DateTime? createdAt;
+  final DateTime createdAt;
   @override
-  final DateTime? updatedAt;
+  final DateTime updatedAt;
 
   @override
   String toString() {
@@ -1122,31 +1122,31 @@ class _$_LearningPathStep implements _LearningPathStep {
 
 abstract class _LearningPathStep implements LearningPathStep {
   const factory _LearningPathStep(
-      {required final String? id,
-      required final String? title,
-      required final String? thumbnail,
-      required final String? summary,
-      required final String? htmlContent,
-      required final DateTime? createdAt,
-      required final DateTime? updatedAt}) = _$_LearningPathStep;
+      {required final String id,
+      required final String title,
+      required final String thumbnail,
+      required final String summary,
+      required final String htmlContent,
+      required final DateTime createdAt,
+      required final DateTime updatedAt}) = _$_LearningPathStep;
 
   factory _LearningPathStep.fromJson(Map<String, dynamic> json) =
       _$_LearningPathStep.fromJson;
 
   @override
-  String? get id;
+  String get id;
   @override
-  String? get title;
+  String get title;
   @override
-  String? get thumbnail;
+  String get thumbnail;
   @override
-  String? get summary;
+  String get summary;
   @override
-  String? get htmlContent;
+  String get htmlContent;
   @override
-  DateTime? get createdAt;
+  DateTime get createdAt;
   @override
-  DateTime? get updatedAt;
+  DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$_LearningPathStepCopyWith<_$_LearningPathStep> get copyWith =>

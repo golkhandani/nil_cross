@@ -2,6 +2,8 @@ import 'dart:io' show Platform;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:test_routing_flow/common/ui/overlay_sliver_appbar.dart';
+import 'package:test_routing_flow/common/ui/safe_area.dart';
 
 enum ScreenType {
   smallPortrait,
@@ -20,8 +22,12 @@ extension BuildContextExtension on BuildContext {
   double get width => screenSize.width;
   double get height => screenSize.height;
 
+  double get safeHeight =>
+      height - NavigationBarSafeArea.height - SliverPersistAppbar.height;
+
   bool get isPhone => !kIsWeb && (Platform.isAndroid || Platform.isIOS);
-  bool get isDesktop => !kIsWeb || Platform.isLinux || Platform.isMacOS || Platform.isWindows;
+  bool get isDesktop =>
+      !kIsWeb || Platform.isLinux || Platform.isMacOS || Platform.isWindows;
   bool get isWeb => kIsWeb;
   bool get isPortrait => !isLandscape;
 

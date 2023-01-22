@@ -60,14 +60,15 @@ class Counts with _$Counts {
 @freezed
 class LearningPathStep with _$LearningPathStep {
   const factory LearningPathStep({
-    required String? id,
-    required String? title,
-    required String? thumbnail,
-    required String? summary,
-    required String? htmlContent,
-    required DateTime? createdAt,
-    required DateTime? updatedAt,
+    required String id,
+    required String title,
+    required String thumbnail,
+    required String summary,
+    required String htmlContent,
+    required DateTime createdAt,
+    required DateTime updatedAt,
   }) = _LearningPathStep;
 
-  factory LearningPathStep.fromJson(Map<String, dynamic> json) => _$LearningPathStepFromJson(json);
+  factory LearningPathStep.fromJson(Map<String, dynamic> json) =>
+      _$LearningPathStepFromJson(json);
 }

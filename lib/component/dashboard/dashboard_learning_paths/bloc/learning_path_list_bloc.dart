@@ -10,7 +10,8 @@ part 'learning_path_list_event.dart';
 part 'learning_path_list_state.dart';
 part 'learning_path_list_bloc.freezed.dart';
 
-class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListState> {
+class LearningPathListBloc
+    extends Bloc<LearningPathListEvent, LearningPathListState> {
   LearningPathListBloc() : super(LearningPathListState.initial()) {
     on<LearningPathListEvent>((event, emit) async {
       await event.when<Future<void>>(
@@ -23,9 +24,12 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
   }
 
   _getLearningPath(String id, Emitter<LearningPathListState> emit) async {
+    emit(state.copyWith(
+      isLoadingLearningPathComplete: true,
+      learningPathComplete: null,
+    ));
     await Future.delayed(const Duration(milliseconds: 2000));
-    late LearningPathComplete? learningPathComplete;
-    learningPathComplete = LearningPathComplete.fromJson({
+    final lc = LearningPathComplete.fromJson({
       "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
       "title": "Raven",
       "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
@@ -37,7 +41,7 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
       "steps": [
         {
           "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
-          "title": "Raven",
+          "title": "Raven 1",
           "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
           "summary":
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
@@ -47,7 +51,7 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
         },
         {
           "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
-          "title": "Raven",
+          "title": "Raven 2",
           "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
           "summary":
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
@@ -57,7 +61,7 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
         },
         {
           "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
-          "title": "Raven",
+          "title": "Raven 3",
           "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
           "summary":
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
@@ -67,7 +71,7 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
         },
         {
           "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
-          "title": "Raven",
+          "title": "Raven 4",
           "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
           "summary":
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
@@ -77,7 +81,7 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
         },
         {
           "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
-          "title": "Raven",
+          "title": "Raven 5",
           "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
           "summary":
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
@@ -87,7 +91,7 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
         },
         {
           "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
-          "title": "Raven",
+          "title": "Raven 6",
           "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
           "summary":
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
@@ -97,7 +101,7 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
         },
         {
           "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
-          "title": "Raven",
+          "title": "Raven 7",
           "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
           "summary":
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
@@ -107,7 +111,7 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
         },
         {
           "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
-          "title": "Raven",
+          "title": "Raven 8",
           "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
           "summary":
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
@@ -129,27 +133,56 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
       "createdAt": "2018-12-10T13:49:51.141Z",
       "updatedAt": "2018-12-10T13:49:51.141Z"
     });
-    emit(state.copyWith(learningPathComplete: learningPathComplete));
+    List<LearningPathStep?> steps = List.from(lc.steps?.map((e) => e) ?? []);
+    steps.shuffle();
+    emit(state.copyWith(
+      isLoadingLearningPathComplete: false,
+      learningPathComplete: LearningPathComplete(
+        id: lc.id,
+        title: lc.title,
+        thumbnail: lc.thumbnail,
+        summary: lc.summary,
+        score: lc.score,
+        duration: lc.duration,
+        counts: lc.counts,
+        steps: steps,
+        author: lc.author,
+        createdAt: lc.createdAt,
+        updatedAt: lc.updatedAt,
+      ),
+      isLoading: false,
+    ));
   }
 
-  _loadselectLearningPath(String id, Emitter<LearningPathListState> emit) async {
-    emit(LearningPathListState.loading());
-    await _load(emit);
+  _loadselectLearningPath(
+    String id,
+    Emitter<LearningPathListState> emit,
+  ) async {
     late LearningPathSummary? selected;
+    await _load(emit);
+    emit(state.copyWith(
+      learningPathSummary: null,
+      learningPathComplete: null,
+      isLoading: true,
+    ));
     state.learningPathCategories.firstWhere((e) {
-      selected = e.items.firstWhere((element) => element?.id == id, orElse: () => null);
+      selected = e.items
+          .firstWhere((element) => element?.id == id, orElse: () => null);
       return selected != null ? true : false;
     });
     emit(state.copyWith(learningPathSummary: selected));
-
+    emit(state.copyWith(
+      learningPathComplete: null,
+      isLoading: false,
+    ));
     locator.get<AppNavigator>().push(DashboardLearningPathSingleRouter(id: id));
-    await _getLearningPath(id, emit);
   }
 
   _selectLearningPath(String id, Emitter<LearningPathListState> emit) async {
     late LearningPathSummary? selected;
     state.learningPathCategories.firstWhere((e) {
-      selected = e.items.firstWhere((element) => element?.id == id, orElse: () => null);
+      selected = e.items
+          .firstWhere((element) => element?.id == id, orElse: () => null);
       return selected != null ? true : false;
     });
     emit(state.copyWith(learningPathSummary: selected));
@@ -157,7 +190,7 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
   }
 
   _load(Emitter<LearningPathListState> emit) async {
-    emit(LearningPathListState.loading());
+    emit(state.copyWith(isLoading: true));
     await Future.delayed(const Duration(milliseconds: 200));
     emit(state.copyWith(learningPathCategories: fakeList));
     emit(state.copyWith(isLoading: false));
@@ -183,14 +216,16 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
             "id": "71a2cd5f-040c-4778-8960-6d4ce8c0b72a",
             "title": "Village",
             "thumbnail": "http://dummyimage.com/119x100.png/dddddd/000000",
-            "summary": "Removal of Infusion Device from Testis, Perc Endo Approach",
+            "summary":
+                "Removal of Infusion Device from Testis, Perc Endo Approach",
             "score": 5
           },
           {
             "id": "a65d34f4-27b6-40de-b87c-50a60f065c7f",
             "title": "Cottonwood",
             "thumbnail": "http://dummyimage.com/204x100.png/dddddd/000000",
-            "summary": "Replacement of R Toe Phalanx with Autol Sub, Perc Approach",
+            "summary":
+                "Replacement of R Toe Phalanx with Autol Sub, Perc Approach",
             "score": 1
           }
         ]
@@ -219,7 +254,8 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
             "id": "e4534fe6-e947-4ad1-a3ad-9c184dcf15ca",
             "title": "Carberry",
             "thumbnail": "http://dummyimage.com/102x100.png/dddddd/000000",
-            "summary": "Supplement R Elbow Bursa/Lig with Autol Sub, Open Approach",
+            "summary":
+                "Supplement R Elbow Bursa/Lig with Autol Sub, Open Approach",
             "score": 1
           }
         ]
@@ -228,7 +264,8 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
         "id": "dfd2155b-16f6-432f-a980-a19571fb5b9a",
         "title": "Help Desk Technician",
         "thumbnail": "http://dummyimage.com/124x100.png/dddddd/000000",
-        "summary": "Disp fx of neck of scapula, right shoulder, init for opn fx",
+        "summary":
+            "Disp fx of neck of scapula, right shoulder, init for opn fx",
         "items": [
           {
             "id": "ba212a9e-db55-4da2-9250-0010a0f923cc",
@@ -248,7 +285,8 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
             "id": "28eec14e-122d-45fc-97da-1bd5b871e8f6",
             "title": "Heffernan",
             "thumbnail": "http://dummyimage.com/103x100.png/5fa2dd/ffffff",
-            "summary": "Restriction of Left Colic Artery, Percutaneous Approach",
+            "summary":
+                "Restriction of Left Colic Artery, Percutaneous Approach",
             "score": 3
           }
         ]
@@ -257,13 +295,15 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
         "id": "3af84cb9-04e4-4f4a-a24c-538f9af38d2c",
         "title": "Health Coach IV",
         "thumbnail": "http://dummyimage.com/193x100.png/ff4444/ffffff",
-        "summary": "Other specified injury of axillary artery, unspecified side",
+        "summary":
+            "Other specified injury of axillary artery, unspecified side",
         "items": [
           {
             "id": "c9f70938-553f-4f1e-9ee0-67b9c79c3a74",
             "title": "Farwell",
             "thumbnail": "http://dummyimage.com/140x100.png/5fa2dd/ffffff",
-            "summary": "Supplement Left Palatine Bone with Nonaut Sub, Open Approach",
+            "summary":
+                "Supplement Left Palatine Bone with Nonaut Sub, Open Approach",
             "score": 3
           },
           {
@@ -299,7 +339,8 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
             "id": "7cd40fdc-219c-4405-bf2a-ffd7d8ef81be",
             "title": "Tennyson",
             "thumbnail": "http://dummyimage.com/127x100.png/ff4444/ffffff",
-            "summary": "Dilation of R Fem Art with 4 Drug-elut, Perc Endo Approach",
+            "summary":
+                "Dilation of R Fem Art with 4 Drug-elut, Perc Endo Approach",
             "score": 5
           },
           {
@@ -321,7 +362,8 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
             "id": "ac70204a-3a4a-4ead-bd8f-63c7acd147d4",
             "title": "Melby",
             "thumbnail": "http://dummyimage.com/138x100.png/cc0000/ffffff",
-            "summary": "Transfer R Foot Muscle with Skin, Subcu, Perc Endo Approach",
+            "summary":
+                "Transfer R Foot Muscle with Skin, Subcu, Perc Endo Approach",
             "score": 5
           },
           {
@@ -335,7 +377,8 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
             "id": "146ef468-b7df-4a11-9929-27f93b1a2819",
             "title": "Barnett",
             "thumbnail": "http://dummyimage.com/208x100.png/5fa2dd/ffffff",
-            "summary": "Introduction of Destr Agent into Mouth/Phar, Via Opening",
+            "summary":
+                "Introduction of Destr Agent into Mouth/Phar, Via Opening",
             "score": 4
           }
         ]
@@ -344,7 +387,8 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
         "id": "bc02123d-fe1c-4755-a1db-cd9098889aa5",
         "title": "Senior Sales Associate",
         "thumbnail": "http://dummyimage.com/246x100.png/5fa2dd/ffffff",
-        "summary": "Malignant melanoma of unspecified lower limb, including hip",
+        "summary":
+            "Malignant melanoma of unspecified lower limb, including hip",
         "items": [
           {
             "id": "09414775-ab88-4f75-9569-e3aa53a60f15",
@@ -364,7 +408,8 @@ class LearningPathListBloc extends Bloc<LearningPathListEvent, LearningPathListS
             "id": "08be4ea1-a6cc-45b0-acbe-a95b83338c83",
             "title": "Sachs",
             "thumbnail": "http://dummyimage.com/164x100.png/ff4444/ffffff",
-            "summary": "Supplement Left Lower Arm with Autol Sub, Open Approach",
+            "summary":
+                "Supplement Left Lower Arm with Autol Sub, Open Approach",
             "score": 4
           }
         ]

@@ -9,6 +9,7 @@ import 'package:test_routing_flow/router/app_navigator.dart';
 import 'package:test_routing_flow/shared/konstants.dart';
 
 class SliverPersistAppbar extends StatelessWidget {
+  static const double height = 56;
   final String? backgroundImage;
   final Color? backgroundColor;
   final double expandedHeight;
@@ -20,6 +21,9 @@ class SliverPersistAppbar extends StatelessWidget {
 
   final String? title;
   final Widget? child;
+
+  final double elevation;
+
   const SliverPersistAppbar({
     Key? key,
     this.backgroundImage,
@@ -31,7 +35,8 @@ class SliverPersistAppbar extends StatelessWidget {
     this.pinned = true,
     this.floating = true,
     this.backgroundColor,
-    this.collapsedHeight,
+    this.collapsedHeight = SliverPersistAppbar.height,
+    this.elevation = 10,
   }) : super(key: key);
 
   @override
@@ -46,6 +51,7 @@ class SliverPersistAppbar extends StatelessWidget {
         backgroundImage: backgroundImage,
         title: title,
         child: child,
+        elevation: elevation,
       ),
       pinned: pinned,
       floating: floating,
@@ -64,6 +70,8 @@ class OverlaySliverAppbar extends SliverPersistentHeaderDelegate {
   final String? title;
   final Widget? child;
 
+  final double elevation;
+
   OverlaySliverAppbar({
     required this.expandedHeight,
     this.collapsedHeight,
@@ -73,10 +81,12 @@ class OverlaySliverAppbar extends SliverPersistentHeaderDelegate {
     this.backButtonEnable = true,
     this.backButtonColor = Colors.red,
     this.child,
+    this.elevation = 10,
   });
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     final navigator = locator.get<AppNavigator>();
     final offset = expandedHeight;
     final opacityLimit = (3 * shrinkOffset) - offset;
@@ -85,7 +95,7 @@ class OverlaySliverAppbar extends SliverPersistentHeaderDelegate {
     final double backgroundOpacity = opacityLimit > 0 ? 1 - opacity : 0;
     return Material(
       color: backgroundColor,
-      elevation: 10,
+      elevation: elevation,
       child: Stack(
         fit: StackFit.expand,
         clipBehavior: Clip.none,
@@ -107,7 +117,8 @@ class OverlaySliverAppbar extends SliverPersistentHeaderDelegate {
                   tileMode: TileMode.mirror,
                 ),
                 child: Container(
-                  color: context.theme.backgroundColor.withOpacity(backgroundOpacity),
+                  color: context.theme.backgroundColor
+                      .withOpacity(backgroundOpacity),
                 ),
               ),
             ),
@@ -115,7 +126,9 @@ class OverlaySliverAppbar extends SliverPersistentHeaderDelegate {
           if (title != null)
             Center(
               child: Opacity(
-                opacity: expandedHeight == collapsedHeight ? 1 : shrinkOffset / expandedHeight,
+                opacity: expandedHeight == collapsedHeight
+                    ? 1
+                    : shrinkOffset / expandedHeight,
                 child: Text(
                   title!,
                   style: kTitleTextStyle.copyWith(
@@ -159,7 +172,8 @@ class OverlaySliverAppbar extends SliverPersistentHeaderDelegate {
   double get maxExtent => expandedHeight;
 
   @override
-  double get minExtent => title != null || backButtonEnable ? kToolbarHeight : collapsedHeight ?? 0;
+  double get minExtent =>
+      title != null || backButtonEnable ? kToolbarHeight : collapsedHeight ?? 0;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;

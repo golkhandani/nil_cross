@@ -701,9 +701,9 @@ abstract class _LearningPathListLoad implements LearningPathListEvent {
 /// @nodoc
 mixin _$LearningPathListState {
   bool get isLoading => throw _privateConstructorUsedError;
-  String? get selectedLearningPathId => throw _privateConstructorUsedError;
   LearningPathSummary? get learningPathSummary =>
       throw _privateConstructorUsedError;
+  bool get isLoadingLearningPathComplete => throw _privateConstructorUsedError;
   LearningPathComplete? get learningPathComplete =>
       throw _privateConstructorUsedError;
   String? get learningPathCategoriesPageTitle =>
@@ -725,8 +725,8 @@ abstract class $LearningPathListStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
-      String? selectedLearningPathId,
       LearningPathSummary? learningPathSummary,
+      bool isLoadingLearningPathComplete,
       LearningPathComplete? learningPathComplete,
       String? learningPathCategoriesPageTitle,
       List<LearningPathCategory> learningPathCategories,
@@ -751,8 +751,8 @@ class _$LearningPathListStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? isLoading = null,
-    Object? selectedLearningPathId = freezed,
     Object? learningPathSummary = freezed,
+    Object? isLoadingLearningPathComplete = null,
     Object? learningPathComplete = freezed,
     Object? learningPathCategoriesPageTitle = freezed,
     Object? learningPathCategories = null,
@@ -763,14 +763,14 @@ class _$LearningPathListStateCopyWithImpl<$Res,
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      selectedLearningPathId: freezed == selectedLearningPathId
-          ? _value.selectedLearningPathId
-          : selectedLearningPathId // ignore: cast_nullable_to_non_nullable
-              as String?,
       learningPathSummary: freezed == learningPathSummary
           ? _value.learningPathSummary
           : learningPathSummary // ignore: cast_nullable_to_non_nullable
               as LearningPathSummary?,
+      isLoadingLearningPathComplete: null == isLoadingLearningPathComplete
+          ? _value.isLoadingLearningPathComplete
+          : isLoadingLearningPathComplete // ignore: cast_nullable_to_non_nullable
+              as bool,
       learningPathComplete: freezed == learningPathComplete
           ? _value.learningPathComplete
           : learningPathComplete // ignore: cast_nullable_to_non_nullable
@@ -828,8 +828,8 @@ abstract class _$$$$LearningPathListStateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
-      String? selectedLearningPathId,
       LearningPathSummary? learningPathSummary,
+      bool isLoadingLearningPathComplete,
       LearningPathComplete? learningPathComplete,
       String? learningPathCategoriesPageTitle,
       List<LearningPathCategory> learningPathCategories,
@@ -853,8 +853,8 @@ class __$$$$LearningPathListStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? selectedLearningPathId = freezed,
     Object? learningPathSummary = freezed,
+    Object? isLoadingLearningPathComplete = null,
     Object? learningPathComplete = freezed,
     Object? learningPathCategoriesPageTitle = freezed,
     Object? learningPathCategories = null,
@@ -865,14 +865,14 @@ class __$$$$LearningPathListStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      selectedLearningPathId: freezed == selectedLearningPathId
-          ? _value.selectedLearningPathId
-          : selectedLearningPathId // ignore: cast_nullable_to_non_nullable
-              as String?,
       learningPathSummary: freezed == learningPathSummary
           ? _value.learningPathSummary
           : learningPathSummary // ignore: cast_nullable_to_non_nullable
               as LearningPathSummary?,
+      isLoadingLearningPathComplete: null == isLoadingLearningPathComplete
+          ? _value.isLoadingLearningPathComplete
+          : isLoadingLearningPathComplete // ignore: cast_nullable_to_non_nullable
+              as bool,
       learningPathComplete: freezed == learningPathComplete
           ? _value.learningPathComplete
           : learningPathComplete // ignore: cast_nullable_to_non_nullable
@@ -899,8 +899,8 @@ class __$$$$LearningPathListStateCopyWithImpl<$Res>
 class _$$$LearningPathListState implements $$LearningPathListState {
   const _$$$LearningPathListState(
       {this.isLoading = true,
-      this.selectedLearningPathId = null,
       this.learningPathSummary = null,
+      this.isLoadingLearningPathComplete = true,
       this.learningPathComplete = null,
       this.learningPathCategoriesPageTitle = 'Learning Path Categories!',
       final List<LearningPathCategory> learningPathCategories = const [],
@@ -913,10 +913,10 @@ class _$$$LearningPathListState implements $$LearningPathListState {
   final bool isLoading;
   @override
   @JsonKey()
-  final String? selectedLearningPathId;
+  final LearningPathSummary? learningPathSummary;
   @override
   @JsonKey()
-  final LearningPathSummary? learningPathSummary;
+  final bool isLoadingLearningPathComplete;
   @override
   @JsonKey()
   final LearningPathComplete? learningPathComplete;
@@ -944,7 +944,7 @@ class _$$$LearningPathListState implements $$LearningPathListState {
 
   @override
   String toString() {
-    return 'LearningPathListState(isLoading: $isLoading, selectedLearningPathId: $selectedLearningPathId, learningPathSummary: $learningPathSummary, learningPathComplete: $learningPathComplete, learningPathCategoriesPageTitle: $learningPathCategoriesPageTitle, learningPathCategories: $learningPathCategories, learningPaths: $learningPaths)';
+    return 'LearningPathListState(isLoading: $isLoading, learningPathSummary: $learningPathSummary, isLoadingLearningPathComplete: $isLoadingLearningPathComplete, learningPathComplete: $learningPathComplete, learningPathCategoriesPageTitle: $learningPathCategoriesPageTitle, learningPathCategories: $learningPathCategories, learningPaths: $learningPaths)';
   }
 
   @override
@@ -954,10 +954,12 @@ class _$$$LearningPathListState implements $$LearningPathListState {
             other is _$$$LearningPathListState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.selectedLearningPathId, selectedLearningPathId) ||
-                other.selectedLearningPathId == selectedLearningPathId) &&
             (identical(other.learningPathSummary, learningPathSummary) ||
                 other.learningPathSummary == learningPathSummary) &&
+            (identical(other.isLoadingLearningPathComplete,
+                    isLoadingLearningPathComplete) ||
+                other.isLoadingLearningPathComplete ==
+                    isLoadingLearningPathComplete) &&
             (identical(other.learningPathComplete, learningPathComplete) ||
                 other.learningPathComplete == learningPathComplete) &&
             (identical(other.learningPathCategoriesPageTitle,
@@ -974,8 +976,8 @@ class _$$$LearningPathListState implements $$LearningPathListState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
-      selectedLearningPathId,
       learningPathSummary,
+      isLoadingLearningPathComplete,
       learningPathComplete,
       learningPathCategoriesPageTitle,
       const DeepCollectionEquality().hash(_learningPathCategories),
@@ -992,8 +994,8 @@ class _$$$LearningPathListState implements $$LearningPathListState {
 abstract class $$LearningPathListState implements LearningPathListState {
   const factory $$LearningPathListState(
       {final bool isLoading,
-      final String? selectedLearningPathId,
       final LearningPathSummary? learningPathSummary,
+      final bool isLoadingLearningPathComplete,
       final LearningPathComplete? learningPathComplete,
       final String? learningPathCategoriesPageTitle,
       final List<LearningPathCategory> learningPathCategories,
@@ -1002,9 +1004,9 @@ abstract class $$LearningPathListState implements LearningPathListState {
   @override
   bool get isLoading;
   @override
-  String? get selectedLearningPathId;
-  @override
   LearningPathSummary? get learningPathSummary;
+  @override
+  bool get isLoadingLearningPathComplete;
   @override
   LearningPathComplete? get learningPathComplete;
   @override
