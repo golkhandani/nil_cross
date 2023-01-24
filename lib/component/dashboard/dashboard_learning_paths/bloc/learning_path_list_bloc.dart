@@ -78,7 +78,11 @@ class LearningPathListBloc
 
   _selectLearningPath(LearningPathSummary learningPathSummary,
       Emitter<LearningPathListState> emit) async {
-    emit(state.copyWith(learningPathComplete: null));
+    emit(state.copyWith(
+      learningPathComplete: null,
+      isLoadingLearningPathComplete: true,
+    ));
+    await Future.delayed(const Duration(milliseconds: 200));
     emit(state.copyWith(learningPathSummary: learningPathSummary));
     locator
         .get<AppNavigator>()

@@ -143,7 +143,7 @@ class _QuickSearchBoxState extends State<QuickSearchBox> {
           Expanded(
             child: Material(
               borderRadius: leftRadius,
-              elevation: 10,
+              elevation: 2,
               child: NitTextField(
                 hintText: 'Search',
                 hintTextFontSize: 16,
@@ -153,7 +153,7 @@ class _QuickSearchBoxState extends State<QuickSearchBox> {
           ),
           Material(
             borderRadius: rightRadius,
-            elevation: 10,
+            elevation: 2,
             child: Ink(
               decoration: BoxDecoration(
                 borderRadius: rightRadius,

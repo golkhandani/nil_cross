@@ -23,6 +23,7 @@ class SliverPersistAppbar extends StatelessWidget {
   final Widget? child;
 
   final double elevation;
+  final double childHeight;
 
   const SliverPersistAppbar({
     Key? key,
@@ -36,7 +37,8 @@ class SliverPersistAppbar extends StatelessWidget {
     this.floating = true,
     this.backgroundColor,
     this.collapsedHeight = SliverPersistAppbar.height,
-    this.elevation = 10,
+    this.elevation = 2,
+    this.childHeight = 48,
   }) : super(key: key);
 
   @override
@@ -52,6 +54,7 @@ class SliverPersistAppbar extends StatelessWidget {
         title: title,
         child: child,
         elevation: elevation,
+        childHeight: childHeight,
       ),
       pinned: pinned,
       floating: floating,
@@ -71,6 +74,7 @@ class OverlaySliverAppbar extends SliverPersistentHeaderDelegate {
   final Widget? child;
 
   final double elevation;
+  final double childHeight;
 
   OverlaySliverAppbar({
     required this.expandedHeight,
@@ -81,18 +85,23 @@ class OverlaySliverAppbar extends SliverPersistentHeaderDelegate {
     this.backButtonEnable = true,
     this.backButtonColor = Colors.red,
     this.child,
+    this.childHeight = 48,
     this.elevation = 10,
   });
 
   @override
   Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
     final navigator = locator.get<AppNavigator>();
     final offset = expandedHeight;
     final opacityLimit = (3 * shrinkOffset) - offset;
     final double opacity = max(1 - opacityLimit / expandedHeight, 0);
     final double childOpacity = opacityLimit > 0 ? opacity : 1;
     final double backgroundOpacity = opacityLimit > 0 ? 1 - opacity : 0;
+    print("object expandedHeight:$expandedHeight shrinkOffset:$shrinkOffset");
     return Material(
       color: backgroundColor,
       elevation: elevation,
@@ -138,7 +147,7 @@ class OverlaySliverAppbar extends SliverPersistentHeaderDelegate {
               ),
             ),
           Positioned(
-            top: expandedHeight - shrinkOffset - 24,
+            top: expandedHeight - shrinkOffset - childHeight / 2,
             child: Container(
               color: Colors.transparent,
               width: context.width,
