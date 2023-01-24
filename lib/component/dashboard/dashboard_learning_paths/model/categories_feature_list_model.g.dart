@@ -66,7 +66,7 @@ _$_LearningPathSummary _$$_LearningPathSummaryFromJson(
       score: json['score'] as int,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
-      auther: AuthorSummary.fromJson(json['auther'] as Map<String, dynamic>),
+      author: AuthorSummary.fromJson(json['author'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_LearningPathSummaryToJson(
@@ -79,7 +79,7 @@ Map<String, dynamic> _$$_LearningPathSummaryToJson(
       'score': instance.score,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
-      'auther': instance.auther,
+      'author': instance.author,
     };
 
 _$_AuthorSummary _$$_AuthorSummaryFromJson(Map<String, dynamic> json) =>

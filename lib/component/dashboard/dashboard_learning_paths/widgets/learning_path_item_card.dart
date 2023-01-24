@@ -130,7 +130,7 @@ class _LearningPathItemCardState extends State<LearningPathItemCard> {
                                       onTap: () => _bloc.add(
                                         LearningPathListEvent
                                             .selectLearningPath(
-                                          widget.learningPath.id,
+                                          widget.learningPath,
                                         ),
                                       ),
                                     ),

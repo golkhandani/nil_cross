@@ -52,7 +52,7 @@ class LearningPathSummary with _$LearningPathSummary {
     required int score,
     required DateTime createdAt,
     required DateTime updatedAt,
-    required AuthorSummary auther,
+    required AuthorSummary author,
   }) = _LearningPathSummary;
 
   factory LearningPathSummary.fromJson(Map<String, dynamic> json) =>

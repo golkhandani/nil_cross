@@ -20,17 +20,17 @@ LearningPathComplete _$LearningPathCompleteFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LearningPathComplete {
-  String? get id => throw _privateConstructorUsedError;
-  String? get title => throw _privateConstructorUsedError;
-  String? get thumbnail => throw _privateConstructorUsedError;
-  String? get summary => throw _privateConstructorUsedError;
-  int? get score => throw _privateConstructorUsedError;
-  String? get duration => throw _privateConstructorUsedError;
-  Counts? get counts => throw _privateConstructorUsedError;
-  List<LearningPathStep?>? get steps => throw _privateConstructorUsedError;
-  Author? get author => throw _privateConstructorUsedError;
-  DateTime? get createdAt => throw _privateConstructorUsedError;
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  String get thumbnail => throw _privateConstructorUsedError;
+  String get summary => throw _privateConstructorUsedError;
+  int get score => throw _privateConstructorUsedError;
+  String get duration => throw _privateConstructorUsedError;
+  Counts get counts => throw _privateConstructorUsedError;
+  List<LearningPathStep> get steps => throw _privateConstructorUsedError;
+  Author get author => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,20 +45,20 @@ abstract class $LearningPathCompleteCopyWith<$Res> {
       _$LearningPathCompleteCopyWithImpl<$Res, LearningPathComplete>;
   @useResult
   $Res call(
-      {String? id,
-      String? title,
-      String? thumbnail,
-      String? summary,
-      int? score,
-      String? duration,
-      Counts? counts,
-      List<LearningPathStep?>? steps,
-      Author? author,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      {String id,
+      String title,
+      String thumbnail,
+      String summary,
+      int score,
+      String duration,
+      Counts counts,
+      List<LearningPathStep> steps,
+      Author author,
+      DateTime createdAt,
+      DateTime updatedAt});
 
-  $CountsCopyWith<$Res>? get counts;
-  $AuthorCopyWith<$Res>? get author;
+  $CountsCopyWith<$Res> get counts;
+  $AuthorCopyWith<$Res> get author;
 }
 
 /// @nodoc
@@ -75,86 +75,78 @@ class _$LearningPathCompleteCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? title = freezed,
-    Object? thumbnail = freezed,
-    Object? summary = freezed,
-    Object? score = freezed,
-    Object? duration = freezed,
-    Object? counts = freezed,
-    Object? steps = freezed,
-    Object? author = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
+    Object? id = null,
+    Object? title = null,
+    Object? thumbnail = null,
+    Object? summary = null,
+    Object? score = null,
+    Object? duration = null,
+    Object? counts = null,
+    Object? steps = null,
+    Object? author = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      title: freezed == title
+              as String,
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      thumbnail: freezed == thumbnail
+              as String,
+      thumbnail: null == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
-              as String?,
-      summary: freezed == summary
+              as String,
+      summary: null == summary
           ? _value.summary
           : summary // ignore: cast_nullable_to_non_nullable
-              as String?,
-      score: freezed == score
+              as String,
+      score: null == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
-              as int?,
-      duration: freezed == duration
+              as int,
+      duration: null == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
-              as String?,
-      counts: freezed == counts
+              as String,
+      counts: null == counts
           ? _value.counts
           : counts // ignore: cast_nullable_to_non_nullable
-              as Counts?,
-      steps: freezed == steps
+              as Counts,
+      steps: null == steps
           ? _value.steps
           : steps // ignore: cast_nullable_to_non_nullable
-              as List<LearningPathStep?>?,
-      author: freezed == author
+              as List<LearningPathStep>,
+      author: null == author
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
-              as Author?,
-      createdAt: freezed == createdAt
+              as Author,
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
+              as DateTime,
+      updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $CountsCopyWith<$Res>? get counts {
-    if (_value.counts == null) {
-      return null;
-    }
-
-    return $CountsCopyWith<$Res>(_value.counts!, (value) {
+  $CountsCopyWith<$Res> get counts {
+    return $CountsCopyWith<$Res>(_value.counts, (value) {
       return _then(_value.copyWith(counts: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $AuthorCopyWith<$Res>? get author {
-    if (_value.author == null) {
-      return null;
-    }
-
-    return $AuthorCopyWith<$Res>(_value.author!, (value) {
+  $AuthorCopyWith<$Res> get author {
+    return $AuthorCopyWith<$Res>(_value.author, (value) {
       return _then(_value.copyWith(author: value) as $Val);
     });
   }
@@ -169,22 +161,22 @@ abstract class _$$_LearningPathCompleteCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? id,
-      String? title,
-      String? thumbnail,
-      String? summary,
-      int? score,
-      String? duration,
-      Counts? counts,
-      List<LearningPathStep?>? steps,
-      Author? author,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      {String id,
+      String title,
+      String thumbnail,
+      String summary,
+      int score,
+      String duration,
+      Counts counts,
+      List<LearningPathStep> steps,
+      Author author,
+      DateTime createdAt,
+      DateTime updatedAt});
 
   @override
-  $CountsCopyWith<$Res>? get counts;
+  $CountsCopyWith<$Res> get counts;
   @override
-  $AuthorCopyWith<$Res>? get author;
+  $AuthorCopyWith<$Res> get author;
 }
 
 /// @nodoc
@@ -198,63 +190,63 @@ class __$$_LearningPathCompleteCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? title = freezed,
-    Object? thumbnail = freezed,
-    Object? summary = freezed,
-    Object? score = freezed,
-    Object? duration = freezed,
-    Object? counts = freezed,
-    Object? steps = freezed,
-    Object? author = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
+    Object? id = null,
+    Object? title = null,
+    Object? thumbnail = null,
+    Object? summary = null,
+    Object? score = null,
+    Object? duration = null,
+    Object? counts = null,
+    Object? steps = null,
+    Object? author = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_$_LearningPathComplete(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      title: freezed == title
+              as String,
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      thumbnail: freezed == thumbnail
+              as String,
+      thumbnail: null == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
-              as String?,
-      summary: freezed == summary
+              as String,
+      summary: null == summary
           ? _value.summary
           : summary // ignore: cast_nullable_to_non_nullable
-              as String?,
-      score: freezed == score
+              as String,
+      score: null == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
-              as int?,
-      duration: freezed == duration
+              as int,
+      duration: null == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
-              as String?,
-      counts: freezed == counts
+              as String,
+      counts: null == counts
           ? _value.counts
           : counts // ignore: cast_nullable_to_non_nullable
-              as Counts?,
-      steps: freezed == steps
+              as Counts,
+      steps: null == steps
           ? _value._steps
           : steps // ignore: cast_nullable_to_non_nullable
-              as List<LearningPathStep?>?,
-      author: freezed == author
+              as List<LearningPathStep>,
+      author: null == author
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
-              as Author?,
-      createdAt: freezed == createdAt
+              as Author,
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
+              as DateTime,
+      updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
     ));
   }
 }
@@ -270,7 +262,7 @@ class _$_LearningPathComplete implements _LearningPathComplete {
       required this.score,
       required this.duration,
       required this.counts,
-      required final List<LearningPathStep?>? steps,
+      required final List<LearningPathStep> steps,
       required this.author,
       required this.createdAt,
       required this.updatedAt})
@@ -280,35 +272,33 @@ class _$_LearningPathComplete implements _LearningPathComplete {
       _$$_LearningPathCompleteFromJson(json);
 
   @override
-  final String? id;
+  final String id;
   @override
-  final String? title;
+  final String title;
   @override
-  final String? thumbnail;
+  final String thumbnail;
   @override
-  final String? summary;
+  final String summary;
   @override
-  final int? score;
+  final int score;
   @override
-  final String? duration;
+  final String duration;
   @override
-  final Counts? counts;
-  final List<LearningPathStep?>? _steps;
+  final Counts counts;
+  final List<LearningPathStep> _steps;
   @override
-  List<LearningPathStep?>? get steps {
-    final value = _steps;
-    if (value == null) return null;
+  List<LearningPathStep> get steps {
     if (_steps is EqualUnmodifiableListView) return _steps;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_steps);
   }
 
   @override
-  final Author? author;
+  final Author author;
   @override
-  final DateTime? createdAt;
+  final DateTime createdAt;
   @override
-  final DateTime? updatedAt;
+  final DateTime updatedAt;
 
   @override
   String toString() {
@@ -370,43 +360,43 @@ class _$_LearningPathComplete implements _LearningPathComplete {
 
 abstract class _LearningPathComplete implements LearningPathComplete {
   const factory _LearningPathComplete(
-      {required final String? id,
-      required final String? title,
-      required final String? thumbnail,
-      required final String? summary,
-      required final int? score,
-      required final String? duration,
-      required final Counts? counts,
-      required final List<LearningPathStep?>? steps,
-      required final Author? author,
-      required final DateTime? createdAt,
-      required final DateTime? updatedAt}) = _$_LearningPathComplete;
+      {required final String id,
+      required final String title,
+      required final String thumbnail,
+      required final String summary,
+      required final int score,
+      required final String duration,
+      required final Counts counts,
+      required final List<LearningPathStep> steps,
+      required final Author author,
+      required final DateTime createdAt,
+      required final DateTime updatedAt}) = _$_LearningPathComplete;
 
   factory _LearningPathComplete.fromJson(Map<String, dynamic> json) =
       _$_LearningPathComplete.fromJson;
 
   @override
-  String? get id;
+  String get id;
   @override
-  String? get title;
+  String get title;
   @override
-  String? get thumbnail;
+  String get thumbnail;
   @override
-  String? get summary;
+  String get summary;
   @override
-  int? get score;
+  int get score;
   @override
-  String? get duration;
+  String get duration;
   @override
-  Counts? get counts;
+  Counts get counts;
   @override
-  List<LearningPathStep?>? get steps;
+  List<LearningPathStep> get steps;
   @override
-  Author? get author;
+  Author get author;
   @override
-  DateTime? get createdAt;
+  DateTime get createdAt;
   @override
-  DateTime? get updatedAt;
+  DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$_LearningPathCompleteCopyWith<_$_LearningPathComplete> get copyWith =>
@@ -419,14 +409,14 @@ Author _$AuthorFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Author {
-  String? get id => throw _privateConstructorUsedError;
-  String? get username => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-  String? get bio => throw _privateConstructorUsedError;
-  String? get email => throw _privateConstructorUsedError;
-  List<String?>? get expertise => throw _privateConstructorUsedError;
-  DateTime? get createdAt => throw _privateConstructorUsedError;
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  String get username => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get bio => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
+  List<String> get expertise => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -439,14 +429,14 @@ abstract class $AuthorCopyWith<$Res> {
       _$AuthorCopyWithImpl<$Res, Author>;
   @useResult
   $Res call(
-      {String? id,
-      String? username,
-      String? name,
-      String? bio,
-      String? email,
-      List<String?>? expertise,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      {String id,
+      String username,
+      String name,
+      String bio,
+      String email,
+      List<String> expertise,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
@@ -462,48 +452,48 @@ class _$AuthorCopyWithImpl<$Res, $Val extends Author>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? username = freezed,
-    Object? name = freezed,
-    Object? bio = freezed,
-    Object? email = freezed,
-    Object? expertise = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
+    Object? id = null,
+    Object? username = null,
+    Object? name = null,
+    Object? bio = null,
+    Object? email = null,
+    Object? expertise = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      username: freezed == username
+              as String,
+      username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: freezed == name
+              as String,
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      bio: freezed == bio
+              as String,
+      bio: null == bio
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
-              as String?,
-      email: freezed == email
+              as String,
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      expertise: freezed == expertise
+              as String,
+      expertise: null == expertise
           ? _value.expertise
           : expertise // ignore: cast_nullable_to_non_nullable
-              as List<String?>?,
-      createdAt: freezed == createdAt
+              as List<String>,
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
+              as DateTime,
+      updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
     ) as $Val);
   }
 }
@@ -515,14 +505,14 @@ abstract class _$$_AuthorCopyWith<$Res> implements $AuthorCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String? id,
-      String? username,
-      String? name,
-      String? bio,
-      String? email,
-      List<String?>? expertise,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      {String id,
+      String username,
+      String name,
+      String bio,
+      String email,
+      List<String> expertise,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
@@ -535,48 +525,48 @@ class __$$_AuthorCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? username = freezed,
-    Object? name = freezed,
-    Object? bio = freezed,
-    Object? email = freezed,
-    Object? expertise = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
+    Object? id = null,
+    Object? username = null,
+    Object? name = null,
+    Object? bio = null,
+    Object? email = null,
+    Object? expertise = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_$_Author(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      username: freezed == username
+              as String,
+      username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: freezed == name
+              as String,
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      bio: freezed == bio
+              as String,
+      bio: null == bio
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
-              as String?,
-      email: freezed == email
+              as String,
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      expertise: freezed == expertise
+              as String,
+      expertise: null == expertise
           ? _value._expertise
           : expertise // ignore: cast_nullable_to_non_nullable
-              as List<String?>?,
-      createdAt: freezed == createdAt
+              as List<String>,
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
+              as DateTime,
+      updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
     ));
   }
 }
@@ -590,7 +580,7 @@ class _$_Author implements _Author {
       required this.name,
       required this.bio,
       required this.email,
-      required final List<String?>? expertise,
+      required final List<String> expertise,
       required this.createdAt,
       required this.updatedAt})
       : _expertise = expertise;
@@ -599,29 +589,27 @@ class _$_Author implements _Author {
       _$$_AuthorFromJson(json);
 
   @override
-  final String? id;
+  final String id;
   @override
-  final String? username;
+  final String username;
   @override
-  final String? name;
+  final String name;
   @override
-  final String? bio;
+  final String bio;
   @override
-  final String? email;
-  final List<String?>? _expertise;
+  final String email;
+  final List<String> _expertise;
   @override
-  List<String?>? get expertise {
-    final value = _expertise;
-    if (value == null) return null;
+  List<String> get expertise {
     if (_expertise is EqualUnmodifiableListView) return _expertise;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_expertise);
   }
 
   @override
-  final DateTime? createdAt;
+  final DateTime createdAt;
   @override
-  final DateTime? updatedAt;
+  final DateTime updatedAt;
 
   @override
   String toString() {
@@ -668,33 +656,33 @@ class _$_Author implements _Author {
 
 abstract class _Author implements Author {
   const factory _Author(
-      {required final String? id,
-      required final String? username,
-      required final String? name,
-      required final String? bio,
-      required final String? email,
-      required final List<String?>? expertise,
-      required final DateTime? createdAt,
-      required final DateTime? updatedAt}) = _$_Author;
+      {required final String id,
+      required final String username,
+      required final String name,
+      required final String bio,
+      required final String email,
+      required final List<String> expertise,
+      required final DateTime createdAt,
+      required final DateTime updatedAt}) = _$_Author;
 
   factory _Author.fromJson(Map<String, dynamic> json) = _$_Author.fromJson;
 
   @override
-  String? get id;
+  String get id;
   @override
-  String? get username;
+  String get username;
   @override
-  String? get name;
+  String get name;
   @override
-  String? get bio;
+  String get bio;
   @override
-  String? get email;
+  String get email;
   @override
-  List<String?>? get expertise;
+  List<String> get expertise;
   @override
-  DateTime? get createdAt;
+  DateTime get createdAt;
   @override
-  DateTime? get updatedAt;
+  DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$_AuthorCopyWith<_$_Author> get copyWith =>
@@ -707,10 +695,10 @@ Counts _$CountsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Counts {
-  int? get steps => throw _privateConstructorUsedError;
-  int? get likes => throw _privateConstructorUsedError;
-  int? get notLikes => throw _privateConstructorUsedError;
-  int? get forks => throw _privateConstructorUsedError;
+  int get steps => throw _privateConstructorUsedError;
+  int get likes => throw _privateConstructorUsedError;
+  int get notLikes => throw _privateConstructorUsedError;
+  int get forks => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -722,7 +710,7 @@ abstract class $CountsCopyWith<$Res> {
   factory $CountsCopyWith(Counts value, $Res Function(Counts) then) =
       _$CountsCopyWithImpl<$Res, Counts>;
   @useResult
-  $Res call({int? steps, int? likes, int? notLikes, int? forks});
+  $Res call({int steps, int likes, int notLikes, int forks});
 }
 
 /// @nodoc
@@ -738,28 +726,28 @@ class _$CountsCopyWithImpl<$Res, $Val extends Counts>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? steps = freezed,
-    Object? likes = freezed,
-    Object? notLikes = freezed,
-    Object? forks = freezed,
+    Object? steps = null,
+    Object? likes = null,
+    Object? notLikes = null,
+    Object? forks = null,
   }) {
     return _then(_value.copyWith(
-      steps: freezed == steps
+      steps: null == steps
           ? _value.steps
           : steps // ignore: cast_nullable_to_non_nullable
-              as int?,
-      likes: freezed == likes
+              as int,
+      likes: null == likes
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
-              as int?,
-      notLikes: freezed == notLikes
+              as int,
+      notLikes: null == notLikes
           ? _value.notLikes
           : notLikes // ignore: cast_nullable_to_non_nullable
-              as int?,
-      forks: freezed == forks
+              as int,
+      forks: null == forks
           ? _value.forks
           : forks // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
     ) as $Val);
   }
 }
@@ -770,7 +758,7 @@ abstract class _$$_CountsCopyWith<$Res> implements $CountsCopyWith<$Res> {
       __$$_CountsCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? steps, int? likes, int? notLikes, int? forks});
+  $Res call({int steps, int likes, int notLikes, int forks});
 }
 
 /// @nodoc
@@ -783,28 +771,28 @@ class __$$_CountsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? steps = freezed,
-    Object? likes = freezed,
-    Object? notLikes = freezed,
-    Object? forks = freezed,
+    Object? steps = null,
+    Object? likes = null,
+    Object? notLikes = null,
+    Object? forks = null,
   }) {
     return _then(_$_Counts(
-      steps: freezed == steps
+      steps: null == steps
           ? _value.steps
           : steps // ignore: cast_nullable_to_non_nullable
-              as int?,
-      likes: freezed == likes
+              as int,
+      likes: null == likes
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
-              as int?,
-      notLikes: freezed == notLikes
+              as int,
+      notLikes: null == notLikes
           ? _value.notLikes
           : notLikes // ignore: cast_nullable_to_non_nullable
-              as int?,
-      forks: freezed == forks
+              as int,
+      forks: null == forks
           ? _value.forks
           : forks // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
     ));
   }
 }
@@ -822,13 +810,13 @@ class _$_Counts implements _Counts {
       _$$_CountsFromJson(json);
 
   @override
-  final int? steps;
+  final int steps;
   @override
-  final int? likes;
+  final int likes;
   @override
-  final int? notLikes;
+  final int notLikes;
   @override
-  final int? forks;
+  final int forks;
 
   @override
   String toString() {
@@ -867,21 +855,21 @@ class _$_Counts implements _Counts {
 
 abstract class _Counts implements Counts {
   const factory _Counts(
-      {required final int? steps,
-      required final int? likes,
-      required final int? notLikes,
-      required final int? forks}) = _$_Counts;
+      {required final int steps,
+      required final int likes,
+      required final int notLikes,
+      required final int forks}) = _$_Counts;
 
   factory _Counts.fromJson(Map<String, dynamic> json) = _$_Counts.fromJson;
 
   @override
-  int? get steps;
+  int get steps;
   @override
-  int? get likes;
+  int get likes;
   @override
-  int? get notLikes;
+  int get notLikes;
   @override
-  int? get forks;
+  int get forks;
   @override
   @JsonKey(ignore: true)
   _$$_CountsCopyWith<_$_Counts> get copyWith =>

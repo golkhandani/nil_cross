@@ -1,0 +1,111 @@
+{
+    "status": 200,
+    "date": "2022-05-03T02:37:17Z",
+    "docs": [
+        {
+            "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
+            "title": "Raven",
+            "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
+            "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
+            "score": 1,
+            "duration": "10 days",
+            "counts": {
+                "steps": 10,
+                "likes": 1000,
+                "notLikes": 3000,
+                "forks": 20
+            },
+            "steps": [
+                {
+                    "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
+                    "title": "Raven 1",
+                    "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
+                    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
+                    "htmlContent": "",
+                    "createdAt": "2018-12-10T13:49:51.141Z",
+                    "updatedAt": "2018-12-10T13:49:51.141Z"
+                },
+                {
+                    "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
+                    "title": "Raven 2",
+                    "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
+                    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
+                    "htmlContent": "",
+                    "createdAt": "2018-12-10T13:49:51.141Z",
+                    "updatedAt": "2018-12-10T13:49:51.141Z"
+                },
+                {
+                    "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
+                    "title": "Raven 3",
+                    "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
+                    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
+                    "htmlContent": "",
+                    "createdAt": "2018-12-10T13:49:51.141Z",
+                    "updatedAt": "2018-12-10T13:49:51.141Z"
+                },
+                {
+                    "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
+                    "title": "Raven 4",
+                    "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
+                    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
+                    "htmlContent": "",
+                    "createdAt": "2018-12-10T13:49:51.141Z",
+                    "updatedAt": "2018-12-10T13:49:51.141Z"
+                },
+                {
+                    "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
+                    "title": "Raven 5",
+                    "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
+                    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
+                    "htmlContent": "",
+                    "createdAt": "2018-12-10T13:49:51.141Z",
+                    "updatedAt": "2018-12-10T13:49:51.141Z"
+                },
+                {
+                    "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
+                    "title": "Raven 6",
+                    "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
+                    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
+                    "htmlContent": "",
+                    "createdAt": "2018-12-10T13:49:51.141Z",
+                    "updatedAt": "2018-12-10T13:49:51.141Z"
+                },
+                {
+                    "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
+                    "title": "Raven 7",
+                    "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
+                    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
+                    "htmlContent": "",
+                    "createdAt": "2018-12-10T13:49:51.141Z",
+                    "updatedAt": "2018-12-10T13:49:51.141Z"
+                },
+                {
+                    "id": "22de8dcd-47fe-4f7d-a3cf-7aee8af4fb5b",
+                    "title": "Raven 8",
+                    "thumbnail": "http://dummyimage.com/172x100.png/5fa2dd/ffffff",
+                    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas quam id dolor",
+                    "htmlContent": "",
+                    "createdAt": "2018-12-10T13:49:51.141Z",
+                    "updatedAt": "2018-12-10T13:49:51.141Z"
+                }
+            ],
+            "author": {
+                "id": "id",
+                "username": "username",
+                "name": "name",
+                "bio": "bio",
+                "email": "email",
+                "expertise": [
+                    "expertise",
+                    "expertise",
+                    "expertise",
+                    "expertise"
+                ],
+                "createdAt": "2018-12-10T13:49:51.141Z",
+                "updatedAt": "2018-12-10T13:49:51.141Z"
+            },
+            "createdAt": "2018-12-10T13:49:51.141Z",
+            "updatedAt": "2018-12-10T13:49:51.141Z"
+        }
+    ]
+}

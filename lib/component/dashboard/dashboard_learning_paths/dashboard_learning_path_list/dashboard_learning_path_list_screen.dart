@@ -71,11 +71,15 @@ class _DashboardLearningPathListScreenState
                     const SliverGap(height: 32),
                     ...state.learningPathCategories
                         .map(
-                          (learningPathCategory) => LearningPathCategoryItems(
-                            categoryTitle: learningPathCategory.title,
-                            learningPaths: learningPathCategory.items,
-                          ),
+                          (learningPathCategory) =>
+                              learningPathCategory.items.isEmpty
+                                  ? null
+                                  : LearningPathCategoryItems(
+                                      categoryTitle: learningPathCategory.title,
+                                      learningPaths: learningPathCategory.items,
+                                    ),
                         )
+                        .whereType<LearningPathCategoryItems>()
                         .toList(),
                     const NavigationBarSliverSafeArea()
                   ],

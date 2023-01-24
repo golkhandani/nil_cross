@@ -126,11 +126,7 @@ class _LearningPathItemStepCardState extends State<LearningPathItemStepCard> {
                                   child: InkWell(
                                     splashColor: context.theme.primaryColor
                                         .withOpacity(0.5),
-                                    onTap: () => _bloc.add(
-                                      LearningPathListEvent.selectLearningPath(
-                                        widget.learningPathStep.id,
-                                      ),
-                                    ),
+                                    onTap: () => {},
                                   ),
                                 ),
                               ],

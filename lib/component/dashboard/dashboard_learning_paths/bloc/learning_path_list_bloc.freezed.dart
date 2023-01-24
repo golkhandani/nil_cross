@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$LearningPathListEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id) selectLearningPath,
+    required TResult Function(LearningPathSummary learningPathSummary)
+        selectLearningPath,
     required TResult Function(String id) getLearningPath,
     required TResult Function(String id) loadSelectLearningPath,
     required TResult Function() load,
@@ -26,7 +27,8 @@ mixin _$LearningPathListEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id)? selectLearningPath,
+    TResult? Function(LearningPathSummary learningPathSummary)?
+        selectLearningPath,
     TResult? Function(String id)? getLearningPath,
     TResult? Function(String id)? loadSelectLearningPath,
     TResult? Function()? load,
@@ -34,7 +36,8 @@ mixin _$LearningPathListEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id)? selectLearningPath,
+    TResult Function(LearningPathSummary learningPathSummary)?
+        selectLearningPath,
     TResult Function(String id)? getLearningPath,
     TResult Function(String id)? loadSelectLearningPath,
     TResult Function()? load,
@@ -101,7 +104,9 @@ abstract class _$$_LearningPathListSelectLearningPathCopyWith<$Res> {
           $Res Function(_$_LearningPathListSelectLearningPath) then) =
       __$$_LearningPathListSelectLearningPathCopyWithImpl<$Res>;
   @useResult
-  $Res call({String id});
+  $Res call({LearningPathSummary learningPathSummary});
+
+  $LearningPathSummaryCopyWith<$Res> get learningPathSummary;
 }
 
 /// @nodoc
@@ -117,14 +122,23 @@ class __$$_LearningPathListSelectLearningPathCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? learningPathSummary = null,
   }) {
     return _then(_$_LearningPathListSelectLearningPath(
-      null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
+      null == learningPathSummary
+          ? _value.learningPathSummary
+          : learningPathSummary // ignore: cast_nullable_to_non_nullable
+              as LearningPathSummary,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LearningPathSummaryCopyWith<$Res> get learningPathSummary {
+    return $LearningPathSummaryCopyWith<$Res>(_value.learningPathSummary,
+        (value) {
+      return _then(_value.copyWith(learningPathSummary: value));
+    });
   }
 }
 
@@ -132,14 +146,14 @@ class __$$_LearningPathListSelectLearningPathCopyWithImpl<$Res>
 
 class _$_LearningPathListSelectLearningPath
     implements _LearningPathListSelectLearningPath {
-  const _$_LearningPathListSelectLearningPath(this.id);
+  const _$_LearningPathListSelectLearningPath(this.learningPathSummary);
 
   @override
-  final String id;
+  final LearningPathSummary learningPathSummary;
 
   @override
   String toString() {
-    return 'LearningPathListEvent.selectLearningPath(id: $id)';
+    return 'LearningPathListEvent.selectLearningPath(learningPathSummary: $learningPathSummary)';
   }
 
   @override
@@ -147,11 +161,12 @@ class _$_LearningPathListSelectLearningPath
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LearningPathListSelectLearningPath &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.learningPathSummary, learningPathSummary) ||
+                other.learningPathSummary == learningPathSummary));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode => Object.hash(runtimeType, learningPathSummary);
 
   @JsonKey(ignore: true)
   @override
@@ -164,36 +179,39 @@ class _$_LearningPathListSelectLearningPath
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id) selectLearningPath,
+    required TResult Function(LearningPathSummary learningPathSummary)
+        selectLearningPath,
     required TResult Function(String id) getLearningPath,
     required TResult Function(String id) loadSelectLearningPath,
     required TResult Function() load,
   }) {
-    return selectLearningPath(id);
+    return selectLearningPath(learningPathSummary);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id)? selectLearningPath,
+    TResult? Function(LearningPathSummary learningPathSummary)?
+        selectLearningPath,
     TResult? Function(String id)? getLearningPath,
     TResult? Function(String id)? loadSelectLearningPath,
     TResult? Function()? load,
   }) {
-    return selectLearningPath?.call(id);
+    return selectLearningPath?.call(learningPathSummary);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id)? selectLearningPath,
+    TResult Function(LearningPathSummary learningPathSummary)?
+        selectLearningPath,
     TResult Function(String id)? getLearningPath,
     TResult Function(String id)? loadSelectLearningPath,
     TResult Function()? load,
     required TResult orElse(),
   }) {
     if (selectLearningPath != null) {
-      return selectLearningPath(id);
+      return selectLearningPath(learningPathSummary);
     }
     return orElse();
   }
@@ -245,10 +263,11 @@ class _$_LearningPathListSelectLearningPath
 
 abstract class _LearningPathListSelectLearningPath
     implements LearningPathListEvent {
-  const factory _LearningPathListSelectLearningPath(final String id) =
+  const factory _LearningPathListSelectLearningPath(
+          final LearningPathSummary learningPathSummary) =
       _$_LearningPathListSelectLearningPath;
 
-  String get id;
+  LearningPathSummary get learningPathSummary;
   @JsonKey(ignore: true)
   _$$_LearningPathListSelectLearningPathCopyWith<
           _$_LearningPathListSelectLearningPath>
@@ -325,7 +344,8 @@ class _$_LearningPathListGetLearningPath
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id) selectLearningPath,
+    required TResult Function(LearningPathSummary learningPathSummary)
+        selectLearningPath,
     required TResult Function(String id) getLearningPath,
     required TResult Function(String id) loadSelectLearningPath,
     required TResult Function() load,
@@ -336,7 +356,8 @@ class _$_LearningPathListGetLearningPath
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id)? selectLearningPath,
+    TResult? Function(LearningPathSummary learningPathSummary)?
+        selectLearningPath,
     TResult? Function(String id)? getLearningPath,
     TResult? Function(String id)? loadSelectLearningPath,
     TResult? Function()? load,
@@ -347,7 +368,8 @@ class _$_LearningPathListGetLearningPath
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id)? selectLearningPath,
+    TResult Function(LearningPathSummary learningPathSummary)?
+        selectLearningPath,
     TResult Function(String id)? getLearningPath,
     TResult Function(String id)? loadSelectLearningPath,
     TResult Function()? load,
@@ -486,7 +508,8 @@ class _$_LearningPathListLoadSelectLearningPath
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id) selectLearningPath,
+    required TResult Function(LearningPathSummary learningPathSummary)
+        selectLearningPath,
     required TResult Function(String id) getLearningPath,
     required TResult Function(String id) loadSelectLearningPath,
     required TResult Function() load,
@@ -497,7 +520,8 @@ class _$_LearningPathListLoadSelectLearningPath
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id)? selectLearningPath,
+    TResult? Function(LearningPathSummary learningPathSummary)?
+        selectLearningPath,
     TResult? Function(String id)? getLearningPath,
     TResult? Function(String id)? loadSelectLearningPath,
     TResult? Function()? load,
@@ -508,7 +532,8 @@ class _$_LearningPathListLoadSelectLearningPath
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id)? selectLearningPath,
+    TResult Function(LearningPathSummary learningPathSummary)?
+        selectLearningPath,
     TResult Function(String id)? getLearningPath,
     TResult Function(String id)? loadSelectLearningPath,
     TResult Function()? load,
@@ -615,7 +640,8 @@ class _$_LearningPathListLoad implements _LearningPathListLoad {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id) selectLearningPath,
+    required TResult Function(LearningPathSummary learningPathSummary)
+        selectLearningPath,
     required TResult Function(String id) getLearningPath,
     required TResult Function(String id) loadSelectLearningPath,
     required TResult Function() load,
@@ -626,7 +652,8 @@ class _$_LearningPathListLoad implements _LearningPathListLoad {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id)? selectLearningPath,
+    TResult? Function(LearningPathSummary learningPathSummary)?
+        selectLearningPath,
     TResult? Function(String id)? getLearningPath,
     TResult? Function(String id)? loadSelectLearningPath,
     TResult? Function()? load,
@@ -637,7 +664,8 @@ class _$_LearningPathListLoad implements _LearningPathListLoad {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id)? selectLearningPath,
+    TResult Function(LearningPathSummary learningPathSummary)?
+        selectLearningPath,
     TResult Function(String id)? getLearningPath,
     TResult Function(String id)? loadSelectLearningPath,
     TResult Function()? load,

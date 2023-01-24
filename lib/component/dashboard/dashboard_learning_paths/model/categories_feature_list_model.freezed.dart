@@ -531,7 +531,7 @@ mixin _$LearningPathSummary {
   int get score => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
-  AuthorSummary get auther => throw _privateConstructorUsedError;
+  AuthorSummary get author => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -553,9 +553,9 @@ abstract class $LearningPathSummaryCopyWith<$Res> {
       int score,
       DateTime createdAt,
       DateTime updatedAt,
-      AuthorSummary auther});
+      AuthorSummary author});
 
-  $AuthorSummaryCopyWith<$Res> get auther;
+  $AuthorSummaryCopyWith<$Res> get author;
 }
 
 /// @nodoc
@@ -578,7 +578,7 @@ class _$LearningPathSummaryCopyWithImpl<$Res, $Val extends LearningPathSummary>
     Object? score = null,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? auther = null,
+    Object? author = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -609,18 +609,18 @@ class _$LearningPathSummaryCopyWithImpl<$Res, $Val extends LearningPathSummary>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      auther: null == auther
-          ? _value.auther
-          : auther // ignore: cast_nullable_to_non_nullable
+      author: null == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
               as AuthorSummary,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $AuthorSummaryCopyWith<$Res> get auther {
-    return $AuthorSummaryCopyWith<$Res>(_value.auther, (value) {
-      return _then(_value.copyWith(auther: value) as $Val);
+  $AuthorSummaryCopyWith<$Res> get author {
+    return $AuthorSummaryCopyWith<$Res>(_value.author, (value) {
+      return _then(_value.copyWith(author: value) as $Val);
     });
   }
 }
@@ -641,10 +641,10 @@ abstract class _$$_LearningPathSummaryCopyWith<$Res>
       int score,
       DateTime createdAt,
       DateTime updatedAt,
-      AuthorSummary auther});
+      AuthorSummary author});
 
   @override
-  $AuthorSummaryCopyWith<$Res> get auther;
+  $AuthorSummaryCopyWith<$Res> get author;
 }
 
 /// @nodoc
@@ -665,7 +665,7 @@ class __$$_LearningPathSummaryCopyWithImpl<$Res>
     Object? score = null,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? auther = null,
+    Object? author = null,
   }) {
     return _then(_$_LearningPathSummary(
       id: null == id
@@ -696,9 +696,9 @@ class __$$_LearningPathSummaryCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      auther: null == auther
-          ? _value.auther
-          : auther // ignore: cast_nullable_to_non_nullable
+      author: null == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
               as AuthorSummary,
     ));
   }
@@ -715,7 +715,7 @@ class _$_LearningPathSummary implements _LearningPathSummary {
       required this.score,
       required this.createdAt,
       required this.updatedAt,
-      required this.auther});
+      required this.author});
 
   factory _$_LearningPathSummary.fromJson(Map<String, dynamic> json) =>
       _$$_LearningPathSummaryFromJson(json);
@@ -735,11 +735,11 @@ class _$_LearningPathSummary implements _LearningPathSummary {
   @override
   final DateTime updatedAt;
   @override
-  final AuthorSummary auther;
+  final AuthorSummary author;
 
   @override
   String toString() {
-    return 'LearningPathSummary(id: $id, title: $title, thumbnail: $thumbnail, summary: $summary, score: $score, createdAt: $createdAt, updatedAt: $updatedAt, auther: $auther)';
+    return 'LearningPathSummary(id: $id, title: $title, thumbnail: $thumbnail, summary: $summary, score: $score, createdAt: $createdAt, updatedAt: $updatedAt, author: $author)';
   }
 
   @override
@@ -757,13 +757,13 @@ class _$_LearningPathSummary implements _LearningPathSummary {
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            (identical(other.auther, auther) || other.auther == auther));
+            (identical(other.author, author) || other.author == author));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, thumbnail, summary,
-      score, createdAt, updatedAt, auther);
+      score, createdAt, updatedAt, author);
 
   @JsonKey(ignore: true)
   @override
@@ -789,7 +789,7 @@ abstract class _LearningPathSummary implements LearningPathSummary {
       required final int score,
       required final DateTime createdAt,
       required final DateTime updatedAt,
-      required final AuthorSummary auther}) = _$_LearningPathSummary;
+      required final AuthorSummary author}) = _$_LearningPathSummary;
 
   factory _LearningPathSummary.fromJson(Map<String, dynamic> json) =
       _$_LearningPathSummary.fromJson;
@@ -809,7 +809,7 @@ abstract class _LearningPathSummary implements LearningPathSummary {
   @override
   DateTime get updatedAt;
   @override
-  AuthorSummary get auther;
+  AuthorSummary get author;
   @override
   @JsonKey(ignore: true)
   _$$_LearningPathSummaryCopyWith<_$_LearningPathSummary> get copyWith =>
