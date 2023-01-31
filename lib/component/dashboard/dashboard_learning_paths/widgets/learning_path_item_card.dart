@@ -36,7 +36,7 @@ class _LearningPathItemCardState extends State<LearningPathItemCard> {
           children: [
             Material(
               clipBehavior: Clip.none,
-              elevation: 10,
+              elevation: 2,
               borderRadius: BorderRadius.circular(widget.borderRadius),
               // shadowColor: context.theme.shadowColor,
               child: SizedBox(
@@ -140,7 +140,7 @@ class _LearningPathItemCardState extends State<LearningPathItemCard> {
                             ),
                           );
                         },
-                        placeholder: (context, url) => kLoadingBox,
+                        placeholder: (context, url) => kLoadingBox(context),
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error),
                       ),

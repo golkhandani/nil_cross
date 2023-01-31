@@ -7,11 +7,12 @@ import 'package:test_routing_flow/router/app_locator.dart';
 
 class DashboardSettingsScreen extends StatefulWidget {
   static const routerName = 'DashboardSettingsRouter';
-  static const routerPath = 'settings';
+  static const routerPath = '/dashboard/settings';
   const DashboardSettingsScreen({super.key});
 
   @override
-  State<DashboardSettingsScreen> createState() => _DashboardSettingsScreenState();
+  State<DashboardSettingsScreen> createState() =>
+      _DashboardSettingsScreenState();
 }
 
 class _DashboardSettingsScreenState extends State<DashboardSettingsScreen> {
@@ -38,14 +39,16 @@ class _DashboardSettingsScreenState extends State<DashboardSettingsScreen> {
                       themeBloc.add(const ThemeEvent.switchTheme());
                     },
                     color: isLight ? Colors.amber : Colors.deepOrange,
-                    child: Text('Change theme to ${isLight ? 'Light' : 'Dark'}'),
+                    child:
+                        Text('Change theme to ${isLight ? 'Light' : 'Dark'}'),
                   );
                 },
               ),
               BlocBuilder<AuthenticationBloc, AuthenticationState>(
                 builder: (context, state) {
                   final isLoggedIn = state.isLoggedIn;
-                  final themeBloc = BlocProvider.of<AuthenticationBloc>(context);
+                  final themeBloc =
+                      BlocProvider.of<AuthenticationBloc>(context);
                   return MaterialButton(
                     onPressed: () {
                       themeBloc.add(AuthenticationEvent.logout());

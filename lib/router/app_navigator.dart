@@ -1,24 +1,23 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vrouter/vrouter.dart';
 
 class AppNavigator {
   final GlobalKey<NavigatorState> _navigatorKey;
   AppNavigator(navigatorKey) : _navigatorKey = navigatorKey;
 
   BuildContext get _context => _navigatorKey.currentContext!;
-  StackRouter get stack => AutoRouter.of(_context);
+  InitializedVRouterSailor get stack => VRouter.of(_context);
 
   back() {
-    stack.navigationHistory.back();
+    stack.historyBack();
   }
 
-  push(PageRouteInfo<dynamic> router) {
-    stack.push(router);
+  push(String name, {Map<String, String> pathParameters = const {}}) {
+    stack.toNamed(name, pathParameters: pathParameters, isReplacement: false);
   }
 
-  replace(PageRouteInfo<dynamic> router) {
-    stack.replace(router);
+  replace(String name) {
+    stack.toNamed(name, isReplacement: true);
   }
 
   Future<bool?> showAlertDialog(Widget alertDialog) async {

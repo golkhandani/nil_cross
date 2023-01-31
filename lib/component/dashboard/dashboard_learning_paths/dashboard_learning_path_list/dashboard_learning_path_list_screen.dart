@@ -11,7 +11,7 @@ import 'package:test_routing_flow/shared/konstants.dart';
 
 class DashboardLearningPathListScreen extends StatefulWidget {
   static const routerName = 'DashboardLearningPathListRouter';
-  static const routerPath = 'learning-paths';
+  static const routerPath = '/dashboard/learning-paths';
   const DashboardLearningPathListScreen({super.key});
 
   @override
@@ -20,8 +20,7 @@ class DashboardLearningPathListScreen extends StatefulWidget {
 }
 
 class _DashboardLearningPathListScreenState
-    extends State<DashboardLearningPathListScreen>
-    with AuthenticationGuardMixin {
+    extends State<DashboardLearningPathListScreen> {
   final LearningPathListBloc _bloc = locator.get();
   final ScrollController _scrollController = ScrollController();
   bool showHeaderIcon = true;
@@ -39,54 +38,52 @@ class _DashboardLearningPathListScreenState
     return BlocBuilder<LearningPathListBloc, LearningPathListState>(
       bloc: _bloc,
       builder: (context, state) {
-        return SafeArea(
-          child: Scaffold(
-            body: Builder(builder: (context) {
-              if (state.isLoading && state.learningPaths.isEmpty) {
-                return kLoadingBox;
-              }
-              if (state.isLoading == false &&
-                  state.learningPathCategories.isEmpty) {
-                return kNotFoundBox;
-              }
-              return NestedScrollView(
-                headerSliverBuilder: (context, innerBoxIsScrolled) {
-                  return [];
-                },
-                body: CustomScrollView(
-                  controller: _scrollController,
-                  slivers: [
-                    SliverPersistAppbar(
-                      backButtonEnable: false,
-                      expandedHeight: 200,
-                      backgroundImage:
-                          state.learningPathCategories[0].thumbnail,
-                      title: state.learningPathCategoriesPageTitle,
-                      pinned: true,
-                      floating: true,
-                      child: const Center(
-                        child: QuickSearchBox(),
-                      ),
+        return Scaffold(
+          body: Builder(builder: (context) {
+            if (state.isLoading && state.learningPaths.isEmpty) {
+              return kLoadingBox(context);
+            }
+            if (state.isLoading == false &&
+                state.learningPathCategories.isEmpty) {
+              return kNotFoundBox;
+            }
+            return NestedScrollView(
+              headerSliverBuilder: (context, innerBoxIsScrolled) {
+                return [];
+              },
+              body: CustomScrollView(
+                controller: _scrollController,
+                slivers: [
+                  SliverPersistAppbar(
+                    backButtonEnable: false,
+                    expandedHeight: 160,
+                    backgroundImage: state.learningPathCategories[0].thumbnail,
+                    title: state.learningPathCategoriesPageTitle,
+                    pinned: true,
+                    floating: true,
+                    childHeight: 48,
+                    child: const Center(
+                      child: QuickSearchBox(),
                     ),
-                    const SliverGap(height: 32),
-                    ...state.learningPathCategories
-                        .map(
-                          (learningPathCategory) =>
-                              learningPathCategory.items.isEmpty
-                                  ? null
-                                  : LearningPathCategoryItems(
-                                      categoryTitle: learningPathCategory.title,
-                                      learningPaths: learningPathCategory.items,
-                                    ),
-                        )
-                        .whereType<LearningPathCategoryItems>()
-                        .toList(),
-                    const NavigationBarSliverSafeArea()
-                  ],
-                ),
-              );
-            }),
-          ),
+                  ),
+                  const SliverGap(height: 48),
+                  ...state.learningPathCategories
+                      .map(
+                        (learningPathCategory) =>
+                            learningPathCategory.items.isEmpty
+                                ? null
+                                : LearningPathCategoryItems(
+                                    categoryTitle: learningPathCategory.title,
+                                    learningPaths: learningPathCategory.items,
+                                  ),
+                      )
+                      .whereType<LearningPathCategoryItems>()
+                      .toList(),
+                  const NavigationBarSliverSafeArea()
+                ],
+              ),
+            );
+          }),
         );
       },
     );
@@ -133,21 +130,23 @@ class _QuickSearchBoxState extends State<QuickSearchBox> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
-      constraints: BoxConstraints(
-        maxHeight: widget.boxConstraints.maxHeight,
-        minHeight: widget.boxConstraints.minHeight,
-        maxWidth: widget.boxConstraints.maxWidth - 48,
-      ),
       child: Row(
         children: [
           Expanded(
             child: Material(
               borderRadius: leftRadius,
               elevation: 2,
-              child: NitTextField(
-                hintText: 'Search',
-                hintTextFontSize: 16,
-                borderRadius: leftRadius,
+              child: Container(
+                constraints: BoxConstraints(
+                  maxHeight: widget.boxConstraints.maxHeight,
+                  minHeight: widget.boxConstraints.minHeight,
+                  maxWidth: widget.boxConstraints.maxWidth - 64,
+                ),
+                child: NitTextField(
+                  hintText: 'Search',
+                  hintTextFontSize: 20,
+                  borderRadius: leftRadius,
+                ),
               ),
             ),
           ),
@@ -167,10 +166,11 @@ class _QuickSearchBoxState extends State<QuickSearchBox> {
                 child: ClipRRect(
                   borderRadius: rightRadius,
                   child: SizedBox(
-                    width: 48,
-                    height: 48,
+                    width: widget.boxConstraints.minHeight,
+                    height: widget.boxConstraints.minHeight,
                     child: Icon(
                       Icons.search,
+                      size: 28,
                       color: context.theme.iconTheme.color!,
                     ),
                   ),
@@ -208,10 +208,16 @@ class NitTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      style: TextStyle(fontSize: hintTextFontSize),
       controller: controller,
       textAlign: TextAlign.start,
       textAlignVertical: TextAlignVertical.bottom,
       decoration: InputDecoration(
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 32.0,
+          horizontal: 16.0,
+        ),
+        isDense: true,
         border: OutlineInputBorder(
           borderRadius:
               borderRadius ?? BorderRadius.all(Radius.circular(radius)),
@@ -234,6 +240,7 @@ class NitTextField extends StatelessWidget {
           borderSide: BorderSide(color: errorBorderColor),
         ),
       ).copyWith(
+        floatingLabelAlignment: FloatingLabelAlignment.center,
         hintText: hintText,
         hintStyle: kContentTextStyle.copyWith(fontSize: hintTextFontSize),
       ),

@@ -15,14 +15,13 @@ import 'package:test_routing_flow/router/app_locator.dart';
 import 'package:test_routing_flow/router/app_navigator.dart';
 import 'package:test_routing_flow/shared/konstants.dart';
 import 'package:timelines/timelines.dart';
+import 'package:vrouter/vrouter.dart';
 
 class DashboardLearningPathSingleScreen extends StatefulWidget {
   static const routerName = 'DashboardLearningPathSingleRouter';
   static const routerPath = ':id';
 
-  final String id;
-  const DashboardLearningPathSingleScreen(
-      {super.key, @PathParam('id') required this.id});
+  const DashboardLearningPathSingleScreen({super.key});
 
   @override
   State<DashboardLearningPathSingleScreen> createState() =>
@@ -34,17 +33,16 @@ class _DashboardLearningPathSingleScreenState
   LearningPathSummary? _learningPathSummary;
   LearningPathComplete? _learningPathComplete;
   final LearningPathListBloc _learningPathListBloc = locator.get();
-
+  String? id;
   @override
   void initState() {
-    print(" uoiuiouio");
-    _loadData();
+    // _loadData();
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
-    // _loadData();
+    _loadData();
     super.didChangeDependencies();
   }
 
@@ -54,10 +52,14 @@ class _DashboardLearningPathSingleScreenState
   }
 
   void _loadData() {
+    id ??= context.vRouter.pathParameters['id']!;
+    if (id == null) {
+      return;
+    }
     if (_learningPathListBloc.state.learningPathSummary != null) {
       _learningPathSummary = _learningPathListBloc.state.learningPathSummary!;
     }
-    _learningPathListBloc.add(LearningPathListEvent.getLearningPath(widget.id));
+    _learningPathListBloc.add(LearningPathListEvent.getLearningPath(id!));
   }
 
   var pressed = false;
@@ -68,17 +70,16 @@ class _DashboardLearningPathSingleScreenState
       bloc: _learningPathListBloc,
       builder: (context, state) {
         if (state.isLoading || state.learningPathSummary == null) {
-          return kLoadingBox;
+          return kLoadingBox(context);
         }
         _learningPathSummary = state.learningPathSummary!;
 
         if (state.learningPathComplete != null) {
           _learningPathComplete = state.learningPathComplete!;
         }
-        // print("_learningPathComplete $_learningPathComplete");
 
-        var list = [
-          const Gap(height: 54),
+        final slivers = [
+          const Gap(height: 80),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -282,92 +283,91 @@ class _DashboardLearningPathSingleScreenState
           ),
           const NavigationBarSafeArea(),
         ];
-        return SafeArea(
-          child: Scaffold(
-            body: NestedScrollView(
-              headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                SliverPersistAppbar(
-                  backButtonEnable: true,
-                  floating: innerBoxIsScrolled,
-                  backButtonColor: context.theme.primaryColorLight,
-                  backgroundColor: context.theme.backgroundColor,
-                  backgroundImage: _learningPathSummary!.thumbnail,
-                  expandedHeight: 200,
-                  title: _learningPathSummary?.title,
-                  elevation: 2,
-                  childHeight: 200,
-                  child: Container(
-                    height: 140,
-                    margin: const EdgeInsets.symmetric(horizontal: 16),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Material(
-                      borderRadius: BorderRadius.circular(10),
-                      elevation: 2,
+        return Scaffold(
+          body: CustomScrollView(
+            slivers: !state.isLoadingLearningPathComplete ||
+                    state.learningPathComplete != null
+                ? [
+                    SliverPersistAppbar(
+                      backButtonEnable: true,
+                      expandedHeight: 200,
+                      backButtonColor: context.textTheme.color!,
+                      backgroundImage:
+                          state.learningPathCategories[0].thumbnail,
+                      title: state.learningPathCategoriesPageTitle,
+                      pinned: true,
+                      floating: false,
+                      childHeight: 140,
                       child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              _learningPathSummary!.title,
-                              style: kHeadingTextStyle,
-                              textAlign: TextAlign.center,
-                            ),
-                            const Text(
-                              'by',
-                              style: kContentTextStyle,
-                              textAlign: TextAlign.center,
-                            ),
-                            Text(
-                              _learningPathSummary!.author.username,
-                              style: kContentTextStyle,
-                              textAlign: TextAlign.center,
-                            ),
-                            const Gap(height: 8),
-                            RatingBarIndicator(
-                              rating: _learningPathSummary!.score.toDouble(),
-                              unratedColor: Colors.amber[400],
-                              itemBuilder: (context, index) => Icon(
-                                index > _learningPathSummary!.score
-                                    ? Icons.star_outline_rounded
-                                    : index ==
-                                            _learningPathSummary!.score.toInt()
-                                        ? Icons.star_half_rounded
-                                        : Icons.star_rounded,
-                                color: Colors.amber,
+                        child: Container(
+                          height: 140,
+                          margin: const EdgeInsets.symmetric(horizontal: 16),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Material(
+                            borderRadius: BorderRadius.circular(10),
+                            elevation: 2,
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    _learningPathSummary!.title,
+                                    style: kHeadingTextStyle,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const Text(
+                                    'by',
+                                    style: kContentTextStyle,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  Text(
+                                    _learningPathSummary!.author.username,
+                                    style: kContentTextStyle,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const Gap(height: 8),
+                                  RatingBarIndicator(
+                                    rating:
+                                        _learningPathSummary!.score.toDouble(),
+                                    unratedColor: Colors.amber[400],
+                                    itemBuilder: (context, index) => Icon(
+                                      index > _learningPathSummary!.score
+                                          ? Icons.star_outline_rounded
+                                          : index ==
+                                                  _learningPathSummary!.score
+                                                      .toInt()
+                                              ? Icons.star_half_rounded
+                                              : Icons.star_rounded,
+                                      color: Colors.amber,
+                                    ),
+                                    itemCount: 5,
+                                    itemSize: 25.0,
+                                    direction: Axis.horizontal,
+                                  ),
+                                ],
                               ),
-                              itemCount: 5,
-                              itemSize: 25.0,
-                              direction: Axis.horizontal,
                             ),
-                          ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-              ],
-              body: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: !state.isLoadingLearningPathComplete ||
-                            state.learningPathComplete != null
-                        ? list
-                        : [
-                            SizedBox(
-                              height: context.safeHeight,
-                              child: kLoadingBox,
-                            ),
-                          ],
-                  ),
-                ),
-              ),
-            ),
+                    ...slivers.map(
+                      (e) => SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: e,
+                        ),
+                      ),
+                    ),
+                  ]
+                : [
+                    SliverFillRemaining(
+                      child: kLoadingBox(context),
+                    )
+                  ],
           ),
         );
       },

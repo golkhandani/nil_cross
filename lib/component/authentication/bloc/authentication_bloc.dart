@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:test_routing_flow/component/authentication/service/authentication_service.dart';
+import 'package:test_routing_flow/component/login/login_screen.dart';
 import 'package:test_routing_flow/router/app_locator.dart';
 import 'package:test_routing_flow/router/app_navigator.dart';
 import 'package:test_routing_flow/router/app_router.dart';
@@ -10,7 +11,8 @@ part 'authentication_state.dart';
 part 'authentication_event.dart';
 part 'authentication_bloc.freezed.dart';
 
-class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
+class AuthenticationBloc
+    extends Bloc<AuthenticationEvent, AuthenticationState> {
   static const isAuthenticatedKey = 'isAuthenticated';
   final AppSharedStore _sharedStore = locator.get();
   final AuthenticationService _authenticationService = locator.get();
@@ -27,7 +29,8 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
 
   Future<bool?> isAuthenticated() async {
     final AppSharedStore sharedStore = locator.get();
-    final isAuthenticated = await sharedStore.get<bool>(isAuthenticatedKey) ?? false;
+    final isAuthenticated =
+        await sharedStore.get<bool>(isAuthenticatedKey) ?? false;
     return isAuthenticated;
   }
 
@@ -35,10 +38,11 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     emit(state.copyWith(isLoading: true));
     await Future.delayed(const Duration(milliseconds: 1000));
 
-    final isAuthenticated = await _sharedStore.get<bool>(isAuthenticatedKey) ?? false;
+    final isAuthenticated =
+        await _sharedStore.get<bool>(isAuthenticatedKey) ?? false;
     if (!isAuthenticated) {
       emit(AuthenticationState.isNotLoggedIn());
-      locator.get<AppNavigator>().push(LoginRouter());
+      locator.get<AppNavigator>().push(LoginScreen.routerPath);
     }
     emit(AuthenticationState.isLoggedIn());
   }
@@ -59,6 +63,6 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     await _sharedStore.delete(isAuthenticatedKey);
     await _authenticationService.refreshIsAuthenticated();
     emit(state.copyWith(isLoggedIn: false));
-    appNavigator.push(LoginRouter());
+    appNavigator.push(LoginScreen.routerPath);
   }
 }

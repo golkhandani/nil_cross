@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:test_routing_flow/common/back_button_visibility_enum.dart';
+import 'package:test_routing_flow/common/breakpoint_extension.dart';
 import 'package:test_routing_flow/router/app_locator.dart';
 import 'package:test_routing_flow/router/app_navigator.dart';
 
@@ -82,16 +83,16 @@ const kSearchDarkDecoration = InputDecoration(
   ),
 );
 
-const kLoadingBox = Center(
-  child: SizedBox(
-    height: 24,
-    width: 24,
-    child: CircularProgressIndicator(
-      color: Colors.black,
-      strokeWidth: 2,
-    ),
-  ),
-);
+Widget kLoadingBox(BuildContext context) => Center(
+      child: SizedBox(
+        height: 24,
+        width: 24,
+        child: CircularProgressIndicator(
+          color: context.textTheme.color,
+          strokeWidth: 2,
+        ),
+      ),
+    );
 
 const kNotFoundBox = Center(
   child: SizedBox(
@@ -100,30 +101,3 @@ const kNotFoundBox = Center(
     child: Text('not found'),
   ),
 );
-
-AutoLeadingButton? kAppBarLeading() {
-  var leading = locator.get<AppNavigator>().stack.canPop(ignoreParentRoutes: true)
-      ? const AutoLeadingButton(
-          ignorePagelessRoutes: true,
-          showIfChildCanPop: true,
-          showIfParentCanPop: true,
-          color: Colors.black,
-        )
-      : null;
-  return leading;
-}
-
-AppBar kAppBar({
-  required Widget title,
-  BackButtonVisibility backButtonVisibility = BackButtonVisibility.auto,
-}) {
-  return AppBar(
-    leading: backButtonVisibility == BackButtonVisibility.invisible ? null : kAppBarLeading(),
-    automaticallyImplyLeading: backButtonVisibility != BackButtonVisibility.invisible,
-    title: title,
-    centerTitle: true,
-    backgroundColor: Colors.white,
-    elevation: 0,
-    foregroundColor: Colors.black,
-  );
-}

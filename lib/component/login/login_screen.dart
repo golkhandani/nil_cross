@@ -17,7 +17,7 @@ class LoginScreen extends StatefulWidget {
   static const routerName = 'LoginRouter';
   static const routerPath = '/login';
 
-  final PageRouteInfo<dynamic>? successRoute;
+  final String? successRoute;
   const LoginScreen({
     super.key,
     this.successRoute,
@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 BlocBuilder<HomeBloc, HomeState>(
                   builder: (context, state) {
                     if (state.isLoading) {
-                      return kLoadingBox;
+                      return kLoadingBox(context);
                     }
                     final homeData = state.home;
                     if (homeData == null) {
@@ -141,14 +141,17 @@ class _LoginScreenState extends State<LoginScreen> {
                               const SizedBox(height: 32),
                               NitButton(
                                 boxConstraints: BoxConstraints(
-                                  maxWidth: context.isSmall ? double.infinity : 160,
+                                  maxWidth:
+                                      context.isSmall ? double.infinity : 160,
                                   minHeight: 54,
                                 ),
                                 onPressed: () => _loginBloc.add(
-                                  const LoginEvent.viaEmail(email: 'email', password: 'password'),
+                                  const LoginEvent.viaEmail(
+                                      email: 'email', password: 'password'),
                                 ),
-                                child:
-                                    state.isLoading ? kLoadingBox : Text(LoginText.loginBtn.text),
+                                child: state.isLoading
+                                    ? kLoadingBox(context)
+                                    : Text(LoginText.loginBtn.text),
                               ),
                             ],
                           ),
@@ -161,8 +164,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: Alignment.bottomCenter,
                   child: TextButton(
                     style: ButtonStyle(
-                      overlayColor: MaterialStateProperty.all(Colors.transparent),
-                      shadowColor: MaterialStateProperty.all(Colors.transparent),
+                      overlayColor:
+                          MaterialStateProperty.all(Colors.transparent),
+                      shadowColor:
+                          MaterialStateProperty.all(Colors.transparent),
                       foregroundColor: MaterialStateProperty.all(Colors.amber),
                     ),
                     onPressed: () => {},

@@ -45,11 +45,11 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context, state) {
         final isAuthenticated = _authenticationService.isAuthenticated;
         if (state.isLoading) {
-          return kLoadingBox;
+          return kLoadingBox(context);
         }
         final homeData = state.home;
         if (homeData == null) {
-          return kLoadingBox;
+          return kLoadingBox(context);
         }
         return Scaffold(
           body: Stack(
@@ -86,8 +86,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 top: context.height / 2,
                 child: Container(
                   color: Colors.transparent,
-                  constraints:
-                      BoxConstraints(maxWidth: (context.width - 32) / (context.isPortrait ? 1 : 2)),
+                  constraints: BoxConstraints(
+                      maxWidth:
+                          (context.width - 32) / (context.isPortrait ? 1 : 2)),
                   margin: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,

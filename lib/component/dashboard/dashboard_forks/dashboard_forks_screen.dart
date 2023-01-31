@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class DashboardForksScreen extends StatefulWidget {
   static const routerName = 'DashboardForksRouter';
-  static const routerPath = 'forks';
+  static const routerPath = '/dashboard/forks';
   const DashboardForksScreen({super.key});
 
   @override

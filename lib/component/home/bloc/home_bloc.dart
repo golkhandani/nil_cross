@@ -5,7 +5,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:test_routing_flow/component/authentication/bloc/authentication_bloc.dart';
 import 'package:test_routing_flow/component/authentication/service/authentication_service.dart';
 import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/dashboard_learning_path_list/dashboard_learning_path_list_screen.dart';
+import 'package:test_routing_flow/component/dashboard/dashboard_screen.dart';
 import 'package:test_routing_flow/component/home/model/home_model.dart';
+import 'package:test_routing_flow/component/login/login_screen.dart';
 import 'package:test_routing_flow/router/app_locator.dart';
 import 'package:test_routing_flow/router/app_navigator.dart';
 import 'package:test_routing_flow/router/app_router.dart';
@@ -48,13 +50,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   _goToLogin(Emitter<HomeState> emit) {
     emit(state.copyWith(isLoading: true));
-    _appNavigator.replace(LoginRouter());
+    _appNavigator.replace(LoginScreen.routerName);
     emit(state.copyWith(isLoading: false));
   }
 
   _goToDashboard(Emitter<HomeState> emit) {
     emit(state.copyWith(isLoading: true));
-    _appNavigator.replace(DashboardRouter());
+    _appNavigator.replace(DashboardScreen.routerName);
     emit(state.copyWith(isLoading: false));
   }
 }

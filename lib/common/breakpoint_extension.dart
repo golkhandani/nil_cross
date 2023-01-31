@@ -35,6 +35,10 @@ extension BuildContextExtension on BuildContext {
 
   double get virtualWidth => isPortrait ? screenSize.width : screenSize.height;
 
+  double get smallPortraitWidth => 360;
+  double get mediumPortraitWidth => 400;
+  double get largePortraitWidth => 600;
+
   ScreenType get screenType {
     final ScreenType type = virtualWidth < 360
         ? ScreenType.smallPortrait

@@ -134,7 +134,7 @@ class _LearningPathItemStepCardState extends State<LearningPathItemStepCard> {
                           ),
                         );
                       },
-                      placeholder: (context, url) => kLoadingBox,
+                      placeholder: (context, url) => kLoadingBox(context),
                       errorWidget: (context, url, error) =>
                           const Icon(Icons.error),
                     ),

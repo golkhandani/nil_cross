@@ -7,6 +7,7 @@ import 'package:test_routing_flow/common/breakpoint_extension.dart';
 import 'package:test_routing_flow/router/app_locator.dart';
 import 'package:test_routing_flow/router/app_navigator.dart';
 import 'package:test_routing_flow/shared/konstants.dart';
+import 'dart:ui' as ui;
 
 class SliverPersistAppbar extends StatelessWidget {
   static const double height = 56;
@@ -89,6 +90,10 @@ class OverlaySliverAppbar extends SliverPersistentHeaderDelegate {
     this.elevation = 10,
   });
 
+  final safeHeight = MediaQueryData.fromWindow(ui.window).padding.top == 0
+      ? null
+      : MediaQueryData.fromWindow(ui.window).padding.top;
+
   @override
   Widget build(
     BuildContext context,
@@ -101,7 +106,7 @@ class OverlaySliverAppbar extends SliverPersistentHeaderDelegate {
     final double opacity = max(1 - opacityLimit / expandedHeight, 0);
     final double childOpacity = opacityLimit > 0 ? opacity : 1;
     final double backgroundOpacity = opacityLimit > 0 ? 1 - opacity : 0;
-    print("object expandedHeight:$expandedHeight shrinkOffset:$shrinkOffset");
+
     return Material(
       color: backgroundColor,
       elevation: elevation,
@@ -113,7 +118,7 @@ class OverlaySliverAppbar extends SliverPersistentHeaderDelegate {
             CachedNetworkImage(
               fit: BoxFit.cover,
               imageUrl: backgroundImage!,
-              placeholder: (context, url) => kLoadingBox,
+              placeholder: (context, url) => kLoadingBox(context),
               errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           Opacity(
@@ -133,40 +138,61 @@ class OverlaySliverAppbar extends SliverPersistentHeaderDelegate {
             ),
           ),
           if (title != null)
-            Center(
-              child: Opacity(
-                opacity: expandedHeight == collapsedHeight
-                    ? 1
-                    : shrinkOffset / expandedHeight,
-                child: Text(
-                  title!,
-                  style: kTitleTextStyle.copyWith(
-                    color: context.textTheme.color,
+            Positioned(
+              top: (safeHeight ?? 12) + 4,
+              bottom: 16,
+              left: 16,
+              right: 16,
+              child: Center(
+                child: Opacity(
+                  opacity: expandedHeight == collapsedHeight
+                      ? 1
+                      : shrinkOffset / expandedHeight,
+                  child: Text(
+                    title!,
+                    style: kTitleTextStyle.copyWith(
+                      color: context.textTheme.color,
+                    ),
                   ),
                 ),
               ),
             ),
           Positioned(
             top: expandedHeight - shrinkOffset - childHeight / 2,
-            child: Container(
-              color: Colors.transparent,
+            child: SizedBox(
               width: context.width,
               child: Opacity(
                 opacity: childOpacity,
-                child: child,
+                child: Center(
+                  child: SizedBox(
+                    width: min(context.width, context.mediumPortraitWidth),
+                    child: child,
+                  ),
+                ),
               ),
             ),
           ),
           Align(
             alignment: Alignment.topLeft,
-            child: navigator.stack.canNavigateBack && backButtonEnable
-                ? Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: BackButton(
-                      onPressed: () => {
-                        navigator.back(),
-                      },
-                      color: backButtonColor,
+            child: backButtonEnable
+                ? Container(
+                    width: 48,
+                    height: 48,
+                    margin: EdgeInsets.fromLTRB(
+                        16, (safeHeight ?? childOpacity * 12) + 4, 4, 4),
+                    decoration: BoxDecoration(
+                      color: context.theme.backgroundColor.withOpacity(0.7),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: const EdgeInsets.all(0),
+                    child: Center(
+                      child: IconButton(
+                        icon: const Icon(Icons.arrow_back),
+                        onPressed: () => {
+                          navigator.back(),
+                        },
+                        color: backButtonColor,
+                      ),
                     ),
                   )
                 : null,
@@ -177,12 +203,12 @@ class OverlaySliverAppbar extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  @override
   double get maxExtent => expandedHeight;
 
   @override
-  double get minExtent =>
-      title != null || backButtonEnable ? kToolbarHeight : collapsedHeight ?? 0;
+  double get minExtent => title != null || backButtonEnable
+      ? kToolbarHeight + (safeHeight ?? 0)
+      : collapsedHeight ?? 0;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;

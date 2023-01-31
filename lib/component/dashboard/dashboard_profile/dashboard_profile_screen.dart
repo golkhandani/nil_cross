@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class DashboardProfileScreen extends StatefulWidget {
   static const routerName = 'DashboardProfileRouter';
-  static const routerPath = 'profile';
+  static const routerPath = '/profile';
   const DashboardProfileScreen({super.key});
 
   @override

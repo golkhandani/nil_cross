@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/dashboard_learning_path_single/dashboard_learning_path_single_screen.dart';
 import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/model/categories_feature_list_model.dart';
 import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/model/learning_path_complete_model.dart';
 import 'package:test_routing_flow/component/dashboard/dashboard_learning_paths/repo/categories.dart';
@@ -36,6 +37,16 @@ class LearningPathListBloc
     steps.shuffle();
     emit(state.copyWith(
       isLoadingLearningPathComplete: false,
+      learningPathSummary: LearningPathSummary(
+        id: lc.id,
+        title: lc.title,
+        thumbnail: lc.thumbnail,
+        summary: lc.summary,
+        score: lc.score,
+        author: AuthorSummary(id: lc.author.id, username: lc.author.username),
+        createdAt: lc.createdAt,
+        updatedAt: lc.updatedAt,
+      ),
       learningPathComplete: LearningPathComplete(
         id: lc.id,
         title: lc.title,
@@ -73,7 +84,7 @@ class LearningPathListBloc
       learningPathComplete: null,
       isLoading: false,
     ));
-    locator.get<AppNavigator>().push(DashboardLearningPathSingleRouter(id: id));
+    // locator.get<AppNavigator>().push();
   }
 
   _selectLearningPath(LearningPathSummary learningPathSummary,
@@ -84,9 +95,10 @@ class LearningPathListBloc
     ));
     await Future.delayed(const Duration(milliseconds: 200));
     emit(state.copyWith(learningPathSummary: learningPathSummary));
-    locator
-        .get<AppNavigator>()
-        .push(DashboardLearningPathSingleRouter(id: learningPathSummary.id));
+    locator.get<AppNavigator>().push(
+      DashboardLearningPathSingleScreen.routerName,
+      pathParameters: {'id': learningPathSummary.id},
+    );
   }
 
   _load(Emitter<LearningPathListState> emit) async {

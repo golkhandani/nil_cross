@@ -53,7 +53,7 @@ class _LearningPathCategoryItemsState extends State<LearningPathCategoryItems> {
                   ...widget.learningPaths.map(
                     (learningPath) {
                       if (learningPath == null) {
-                        return kLoadingBox;
+                        return kLoadingBox(context);
                       }
                       double randomFactor = 2.1;
                       return LearningPathItemCard(
